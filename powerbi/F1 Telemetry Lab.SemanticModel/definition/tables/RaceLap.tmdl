@@ -1,0 +1,16 @@
+table 'RaceLap'
+
+	column 'Lap'
+		dataType: int64
+		sourceColumn: Lap
+		summarizeBy: none
+
+	partition 'RaceLap' = m
+		mode: import
+		source =
+			let
+				Source = Csv.Document(Binary.FromText("TGFwDQoxDQoyDQozDQo0DQo1DQo2DQo3DQo4DQo5DQoxMA0KMTENCjEyDQoxMw0KMTQNCjE1DQoxNg0KMTcNCjE4DQoxOQ0KMjANCjIxDQoyMg0KMjMNCjI0DQoyNQ0KMjYNCjI3DQoyOA0KMjkNCjMwDQozMQ0KMzINCjMzDQozNA0KMzUNCjM2DQozNw0KMzgNCjM5DQo0MA0KNDENCjQyDQo0Mw0KNDQNCjQ1DQo0Ng0KNDcNCjQ4DQo0OQ0KNTANCjUxDQo1Mg0KNTMNCg==", BinaryEncoding.Base64), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				Typed = Table.TransformColumnTypes(Headers, {{"Lap", Int64.Type}}, "en-US")
+			in
+				Typed

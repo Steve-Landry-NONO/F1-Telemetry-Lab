@@ -1,0 +1,61 @@
+table 'DimLap'
+
+	column 'LapId'
+		dataType: int64
+		sourceColumn: LapId
+		summarizeBy: none
+
+	column 'Driver'
+		dataType: string
+		sourceColumn: Driver
+		summarizeBy: none
+
+	column 'LapNumber'
+		dataType: int64
+		sourceColumn: LapNumber
+		summarizeBy: none
+
+	column 'LapTimeS'
+		dataType: double
+		sourceColumn: LapTimeS
+		summarizeBy: none
+
+	column 'S1'
+		dataType: double
+		sourceColumn: S1
+		summarizeBy: none
+
+	column 'S2'
+		dataType: double
+		sourceColumn: S2
+		summarizeBy: none
+
+	column 'S3'
+		dataType: double
+		sourceColumn: S3
+		summarizeBy: none
+
+	column 'Source'
+		dataType: string
+		sourceColumn: Source
+		summarizeBy: none
+
+	column 'Session'
+		dataType: string
+		sourceColumn: Session
+		summarizeBy: none
+
+	column 'Circuit'
+		dataType: string
+		sourceColumn: Circuit
+		summarizeBy: none
+
+	partition 'DimLap' = m
+		mode: import
+		source =
+			let
+				Source = Csv.Document(Binary.FromText("TGFwSWQsRHJpdmVyLExhcE51bWJlcixMYXBUaW1lUyxTMSxTMixTMyxTb3VyY2UsU2Vzc2lvbixDaXJjdWl0DQoxLE5PUiwxMSw3OS4zMjcsMjYuNDkyLDI2LjU3OSwyNi4yNTYsRkFTVEYxIEhJU1RPUklDQUwsMjAyNCBJdGFseSBRLE1vbnphDQoyLExFQywyMCw3OS40NjEsMjYuMzczLDI2LjczMiwyNi4zNTYsRkFTVEYxIEhJU1RPUklDQUwsMjAyNCBJdGFseSBRLE1vbnphDQo=", BinaryEncoding.Base64), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				Typed = Table.TransformColumnTypes(Headers, {{"LapId", Int64.Type}, {"Driver", type text}, {"LapNumber", Int64.Type}, {"LapTimeS", type number}, {"S1", type number}, {"S2", type number}, {"S3", type number}, {"Source", type text}, {"Session", type text}, {"Circuit", type text}}, "en-US")
+			in
+				Typed

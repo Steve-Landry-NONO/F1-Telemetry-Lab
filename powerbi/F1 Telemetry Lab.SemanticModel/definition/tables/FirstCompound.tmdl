@@ -1,0 +1,16 @@
+table 'FirstCompound'
+
+	column 'Compound'
+		dataType: string
+		sourceColumn: Compound
+		summarizeBy: none
+
+	partition 'FirstCompound' = m
+		mode: import
+		source =
+			let
+				Source = Csv.Document(Binary.FromText("Q29tcG91bmQNClNPRlQNCk1FRElVTQ0KSEFSRA0K", BinaryEncoding.Base64), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				Typed = Table.TransformColumnTypes(Headers, {{"Compound", type text}}, "en-US")
+			in
+				Typed

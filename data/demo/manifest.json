@@ -1,0 +1,9 @@
+{
+  "source": "synthetic",
+  "description": "Deterministic invented telemetry and stylised geometry; not real drivers or race observations.",
+  "sha256": {
+    "DimDistance.csv": "7be12e5889ff92b87496d6f392e78004acfa1514c0e93ad4e7fcbcf5a79c12b0",
+    "DimLap.csv": "6de7636aeb226a2df92e6b44d6552a311fa8cb660a235efa0054449ca0399903",
+    "FactTelemetry.csv": "cf85a070af4b5ab415773d5e671e20b46f12c864f7e4e3d8fef6f5f81dcf74f5"
+  }
+}

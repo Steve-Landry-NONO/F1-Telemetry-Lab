@@ -1,0 +1,16 @@
+table 'Degradation'
+
+	column 'Multiplier'
+		dataType: double
+		sourceColumn: Multiplier
+		summarizeBy: none
+
+	partition 'Degradation' = m
+		mode: import
+		source =
+			let
+				Source = Csv.Document(Binary.FromText("TXVsdGlwbGllcg0KMC41DQowLjYNCjAuNw0KMC44DQowLjkNCjEuMA0KMS4xDQoxLjINCjEuMw0KMS40DQoxLjUNCjEuNg0KMS43DQoxLjgNCjEuOQ0KMi4wDQo=", BinaryEncoding.Base64), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				Typed = Table.TransformColumnTypes(Headers, {{"Multiplier", type number}}, "en-US")
+			in
+				Typed

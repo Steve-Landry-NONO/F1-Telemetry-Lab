@@ -1,0 +1,12 @@
+{
+  "name": "F1 Midnight",
+  "dataColors": [
+    "#74f7ce",
+    "#ff544f",
+    "#ffce62",
+    "#759bff"
+  ],
+  "background": "#080e18",
+  "foreground": "#eef4ff",
+  "tableAccent": "#74f7ce"
+}

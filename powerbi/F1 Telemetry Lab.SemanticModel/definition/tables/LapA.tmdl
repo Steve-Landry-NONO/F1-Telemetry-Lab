@@ -1,0 +1,21 @@
+table 'LapA'
+
+	column 'LapId'
+		dataType: int64
+		sourceColumn: LapId
+		summarizeBy: none
+
+	column 'Driver'
+		dataType: string
+		sourceColumn: Driver
+		summarizeBy: none
+
+	partition 'LapA' = m
+		mode: import
+		source =
+			let
+				Source = Csv.Document(Binary.FromText("TGFwSWQsRHJpdmVyDQoxLE5PUg0KMixMRUMNCg==", BinaryEncoding.Base64), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				Typed = Table.TransformColumnTypes(Headers, {{"LapId", Int64.Type}, {"Driver", type text}}, "en-US")
+			in
+				Typed

@@ -1,0 +1,16 @@
+table 'BasePace'
+
+	column 'Seconds'
+		dataType: int64
+		sourceColumn: Seconds
+		summarizeBy: none
+
+	partition 'BasePace' = m
+		mode: import
+		source =
+			let
+				Source = Csv.Document(Binary.FromText("U2Vjb25kcw0KNzUNCjc2DQo3Nw0KNzgNCjc5DQo4MA0KODENCjgyDQo4Mw0KODQNCjg1DQo4Ng0KODcNCjg4DQo4OQ0KOTANCjkxDQo5Mg0KOTMNCjk0DQo5NQ0K", BinaryEncoding.Base64), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				Typed = Table.TransformColumnTypes(Headers, {{"Seconds", Int64.Type}}, "en-US")
+			in
+				Typed

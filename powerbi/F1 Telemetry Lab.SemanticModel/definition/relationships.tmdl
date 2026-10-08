@@ -1,0 +1,7 @@
+relationship lap_telemetry
+	fromColumn: FactTelemetry.LapId
+	toColumn: DimLap.LapId
+
+relationship distance_telemetry
+	fromColumn: FactTelemetry.Bin
+	toColumn: DimDistance.Bin

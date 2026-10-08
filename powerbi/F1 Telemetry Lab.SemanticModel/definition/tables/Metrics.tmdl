@@ -1,0 +1,234 @@
+table 'Metrics'
+
+	measure 'Selected bin' = SELECTEDVALUE(ReplayBin[Bin], 0)
+		formatString: 0
+
+	measure 'Selected driver' = SELECTEDVALUE(DimLap[Driver], "Select one driver")
+
+	measure 'Data source' = CONCATENATEX(VALUES(DimLap[Source]), DimLap[Source], ", ")
+
+	measure 'Session label' = CONCATENATEX(VALUES(DimLap[Session]), DimLap[Session], ", ")
+
+	measure 'Lap time s' = ```
+			VAR lap = SELECTEDVALUE(DimLap[LapId], 1)
+			RETURN CALCULATE(MAX(DimLap[LapTimeS]), TREATAS({lap}, DimLap[LapId]))
+			```
+		formatString: 0.000
+
+	measure 'Speed trace' = ```
+			VAR lap = SELECTEDVALUE(DimLap[LapId], 1)
+			RETURN CALCULATE(AVERAGE(FactTelemetry[SpeedKmh]), TREATAS({lap}, DimLap[LapId]))
+			```
+		formatString: 0.00
+
+	measure 'Throttle trace' = ```
+			VAR lap = SELECTEDVALUE(DimLap[LapId], 1)
+			RETURN CALCULATE(AVERAGE(FactTelemetry[ThrottlePct]), TREATAS({lap}, DimLap[LapId]))
+			```
+		formatString: 0.00
+
+	measure 'Brake trace' = ```
+			VAR lap = SELECTEDVALUE(DimLap[LapId], 1)
+			RETURN 100 * CALCULATE(AVERAGE(FactTelemetry[Brake]), TREATAS({lap}, DimLap[LapId]))
+			```
+		formatString: 0.00
+
+	measure 'Replay progress pct' = [Selected bin] / 5
+		formatString: 0.00
+
+	measure 'Current speed kmh' = ```
+			VAR lap = SELECTEDVALUE(DimLap[LapId], 1)
+			RETURN CALCULATE(MAX(FactTelemetry[SpeedKmh]), TREATAS({lap}, DimLap[LapId]), REMOVEFILTERS(DimDistance), TREATAS({[Selected bin]}, FactTelemetry[Bin]))
+			```
+		formatString: 0.00
+
+	measure 'Current throttle pct' = ```
+			VAR lap = SELECTEDVALUE(DimLap[LapId], 1)
+			RETURN CALCULATE(MAX(FactTelemetry[ThrottlePct]), TREATAS({lap}, DimLap[LapId]), REMOVEFILTERS(DimDistance), TREATAS({[Selected bin]}, FactTelemetry[Bin]))
+			```
+		formatString: 0.00
+
+	measure 'Current brake' = ```
+			VAR lap = SELECTEDVALUE(DimLap[LapId], 1)
+			RETURN CALCULATE(MAX(FactTelemetry[Brake]), TREATAS({lap}, DimLap[LapId]), REMOVEFILTERS(DimDistance), TREATAS({[Selected bin]}, FactTelemetry[Bin]))
+			```
+		formatString: 0
+
+	measure 'Current gear' = ```
+			VAR lap = SELECTEDVALUE(DimLap[LapId], 1)
+			RETURN CALCULATE(MAX(FactTelemetry[Gear]), TREATAS({lap}, DimLap[LapId]), REMOVEFILTERS(DimDistance), TREATAS({[Selected bin]}, FactTelemetry[Bin]))
+			```
+		formatString: 0
+
+	measure 'Current elapsed s' = ```
+			VAR lap = SELECTEDVALUE(DimLap[LapId], 1)
+			RETURN CALCULATE(MAX(FactTelemetry[TimeMs]), TREATAS({lap}, DimLap[LapId]), REMOVEFILTERS(DimDistance), TREATAS({[Selected bin]}, FactTelemetry[Bin])) / 1000
+			```
+		formatString: 0.000
+
+	measure 'Speed A' = ```
+			VAR lap = SELECTEDVALUE(LapA[LapId], 1)
+			RETURN CALCULATE(MAX(FactTelemetry[SpeedKmh]), REMOVEFILTERS(DimLap), TREATAS({lap}, DimLap[LapId]))
+			```
+		formatString: 0.00
+
+	measure 'Elapsed A' = ```
+			VAR lap = SELECTEDVALUE(LapA[LapId], 1)
+			RETURN CALCULATE(MAX(FactTelemetry[TimeMs]), REMOVEFILTERS(DimLap), TREATAS({lap}, DimLap[LapId])) / 1000
+			```
+		formatString: 0.00
+
+	measure 'Lap time A s' = ```
+			VAR lap = SELECTEDVALUE(LapA[LapId], 1)
+			RETURN CALCULATE(MAX(DimLap[LapTimeS]), REMOVEFILTERS(DimLap), TREATAS({lap}, DimLap[LapId]))
+			```
+		formatString: 0.000
+
+	measure 'Sector 1 A s' = ```
+			VAR lap = SELECTEDVALUE(LapA[LapId], 1)
+			RETURN CALCULATE(MAX(DimLap[S1]), REMOVEFILTERS(DimLap), TREATAS({lap}, DimLap[LapId]))
+			```
+		formatString: 0.000
+
+	measure 'Sector 2 A s' = ```
+			VAR lap = SELECTEDVALUE(LapA[LapId], 1)
+			RETURN CALCULATE(MAX(DimLap[S2]), REMOVEFILTERS(DimLap), TREATAS({lap}, DimLap[LapId]))
+			```
+		formatString: 0.000
+
+	measure 'Sector 3 A s' = ```
+			VAR lap = SELECTEDVALUE(LapA[LapId], 1)
+			RETURN CALCULATE(MAX(DimLap[S3]), REMOVEFILTERS(DimLap), TREATAS({lap}, DimLap[LapId]))
+			```
+		formatString: 0.000
+
+	measure 'Speed B' = ```
+			VAR lap = SELECTEDVALUE(LapB[LapId], 2)
+			RETURN CALCULATE(MAX(FactTelemetry[SpeedKmh]), REMOVEFILTERS(DimLap), TREATAS({lap}, DimLap[LapId]))
+			```
+		formatString: 0.00
+
+	measure 'Elapsed B' = ```
+			VAR lap = SELECTEDVALUE(LapB[LapId], 2)
+			RETURN CALCULATE(MAX(FactTelemetry[TimeMs]), REMOVEFILTERS(DimLap), TREATAS({lap}, DimLap[LapId])) / 1000
+			```
+		formatString: 0.00
+
+	measure 'Lap time B s' = ```
+			VAR lap = SELECTEDVALUE(LapB[LapId], 2)
+			RETURN CALCULATE(MAX(DimLap[LapTimeS]), REMOVEFILTERS(DimLap), TREATAS({lap}, DimLap[LapId]))
+			```
+		formatString: 0.000
+
+	measure 'Sector 1 B s' = ```
+			VAR lap = SELECTEDVALUE(LapB[LapId], 2)
+			RETURN CALCULATE(MAX(DimLap[S1]), REMOVEFILTERS(DimLap), TREATAS({lap}, DimLap[LapId]))
+			```
+		formatString: 0.000
+
+	measure 'Sector 2 B s' = ```
+			VAR lap = SELECTEDVALUE(LapB[LapId], 2)
+			RETURN CALCULATE(MAX(DimLap[S2]), REMOVEFILTERS(DimLap), TREATAS({lap}, DimLap[LapId]))
+			```
+		formatString: 0.000
+
+	measure 'Sector 3 B s' = ```
+			VAR lap = SELECTEDVALUE(LapB[LapId], 2)
+			RETURN CALCULATE(MAX(DimLap[S3]), REMOVEFILTERS(DimLap), TREATAS({lap}, DimLap[LapId]))
+			```
+		formatString: 0.000
+
+	measure 'Delta B minus A s' = [Elapsed B] - [Elapsed A]
+		formatString: 0.000
+
+	measure 'Lap delta s' = [Lap time B s] - [Lap time A s]
+		formatString: 0.000
+
+	measure 'Sector 1 delta s' = [Sector 1 B s] - [Sector 1 A s]
+		formatString: 0.000
+
+	measure 'Sector 2 delta s' = [Sector 2 B s] - [Sector 2 A s]
+		formatString: 0.000
+
+	measure 'Sector 3 delta s' = [Sector 3 B s] - [Sector 3 A s]
+		formatString: 0.000
+
+	measure 'Strategy status' = IF(SELECTEDVALUE(FirstCompound[Compound], "MEDIUM") = SELECTEDVALUE(SecondCompound[Compound], "HARD"), "INVALID: choose two distinct compounds", "EDUCATIONAL MODEL | dry race | one stop")
+
+	measure 'Strategy total s' = ```
+			VAR tyreOne = SELECTEDVALUE(FirstCompound[Compound], "MEDIUM")
+			VAR tyreTwo = SELECTEDVALUE(SecondCompound[Compound], "HARD")
+			VAR stop = SELECTEDVALUE(StopLap[Lap], 24)
+			VAR remaining = 53 - stop
+			VAR pit = SELECTEDVALUE(PitLoss[Seconds], 22)
+			VAR mult = SELECTEDVALUE(Degradation[Multiplier], 1)
+			VAR base = SELECTEDVALUE(BasePace[Seconds], 84)
+			VAR o1 = LOOKUPVALUE(Compound[Offset], Compound[Compound], tyreOne)
+			VAR o2 = LOOKUPVALUE(Compound[Offset], Compound[Compound], tyreTwo)
+			VAR d1 = LOOKUPVALUE(Compound[Degradation], Compound[Compound], tyreOne) * mult
+			VAR d2 = LOOKUPVALUE(Compound[Degradation], Compound[Compound], tyreTwo) * mult
+			RETURN IF(tyreOne <> tyreTwo, stop*(base+o1) + d1*stop*(stop-1)/2 + remaining*(base+o2) + d2*remaining*(remaining-1)/2 + pit)
+			```
+		formatString: 0.000
+
+	measure 'Strategy total min' = [Strategy total s] / 60
+		formatString: 0.00
+
+	measure 'Candidate total s' = ```
+			VAR stop = SELECTEDVALUE(CandidateStop[Lap])
+			RETURN IF(NOT ISBLANK(stop), CALCULATE([Strategy total s], REMOVEFILTERS(StopLap), TREATAS({stop}, StopLap[Lap])))
+			```
+		formatString: 0.000
+
+	measure 'Best stop lap' = ```
+			VAR candidates = ADDCOLUMNS(ALL(CandidateStop[Lap]), "Cost", [Candidate total s])
+			VAR best = TOPN(1, FILTER(candidates, NOT ISBLANK([Cost])), [Cost], ASC, CandidateStop[Lap], ASC)
+			RETURN MAXX(best, CandidateStop[Lap])
+			```
+		formatString: 0
+
+	measure 'Penalty vs best s' = ```
+			VAR candidates = ADDCOLUMNS(ALL(CandidateStop[Lap]), "Cost", [Candidate total s])
+			RETURN IF(NOT ISBLANK([Strategy total s]), [Strategy total s] - MINX(candidates, [Cost]))
+			```
+		formatString: 0.000
+
+	measure 'Simulated lap s' = ```
+			VAR lap = SELECTEDVALUE(RaceLap[Lap])
+			VAR stop = SELECTEDVALUE(StopLap[Lap], 24)
+			VAR tyreOne = SELECTEDVALUE(FirstCompound[Compound], "MEDIUM")
+			VAR tyreTwo = SELECTEDVALUE(SecondCompound[Compound], "HARD")
+			VAR chosenTyre = IF(lap <= stop, tyreOne, tyreTwo)
+			VAR age = IF(lap <= stop, lap - 1, lap - stop - 1)
+			VAR base = SELECTEDVALUE(BasePace[Seconds], 84)
+			VAR mult = SELECTEDVALUE(Degradation[Multiplier], 1)
+			RETURN IF(tyreOne <> tyreTwo && NOT ISBLANK(lap), base + LOOKUPVALUE(Compound[Offset], Compound[Compound], chosenTyre) + age * mult * LOOKUPVALUE(Compound[Degradation], Compound[Compound], chosenTyre) + IF(lap = stop, SELECTEDVALUE(PitLoss[Seconds], 22), 0))
+			```
+		formatString: 0.000
+
+	measure 'Track SVG' = ```
+			VAR lap = SELECTEDVALUE(DimLap[LapId], 1)
+			VAR bin = [Selected bin]
+			VAR points = CALCULATETABLE(FactTelemetry, REMOVEFILTERS(DimDistance), TREATAS({lap}, DimLap[LapId]))
+			VAR track = CONCATENATEX(points, FORMAT(FactTelemetry[SVGX], "0.0", "en-US") & "," & FORMAT(FactTelemetry[SVGY], "0.0", "en-US"), " ", FactTelemetry[Bin], ASC)
+			VAR x = MAXX(FILTER(points, FactTelemetry[Bin] = bin), FactTelemetry[SVGX])
+			VAR y = MAXX(FILTER(points, FactTelemetry[Bin] = bin), FactTelemetry[SVGY])
+			VAR svg = "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 460'><rect width='640' height='460' fill='#101826'/><polyline points='" & track & "' fill='none' stroke='#29374c' stroke-width='16' stroke-linejoin='round'/><polyline points='" & track & "' fill='none' stroke='#74f7ce' stroke-width='3'/><circle cx='" & FORMAT(x,"0.0","en-US") & "' cy='" & FORMAT(y,"0.0","en-US") & "' r='9' fill='#ff544f' stroke='white' stroke-width='3'/></svg>"
+			RETURN IF(NOT ISBLANK(lap), "data:image/svg+xml;utf8," & SUBSTITUTE(svg, "#", "%23"))
+			```
+		dataCategory: ImageUrl
+
+	column 'Anchor'
+		dataType: int64
+		sourceColumn: Anchor
+		summarizeBy: none
+
+	partition 'Metrics' = m
+		mode: import
+		source =
+			let
+				Source = Csv.Document(Binary.FromText("QW5jaG9yDQoxDQo=", BinaryEncoding.Base64), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				Typed = Table.TransformColumnTypes(Headers, {{"Anchor", Int64.Type}}, "en-US")
+			in
+				Typed

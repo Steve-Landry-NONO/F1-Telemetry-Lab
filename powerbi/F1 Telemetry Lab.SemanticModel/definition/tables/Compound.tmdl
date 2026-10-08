@@ -1,0 +1,26 @@
+table 'Compound'
+
+	column 'Compound'
+		dataType: string
+		sourceColumn: Compound
+		summarizeBy: none
+
+	column 'Offset'
+		dataType: double
+		sourceColumn: Offset
+		summarizeBy: none
+
+	column 'Degradation'
+		dataType: double
+		sourceColumn: Degradation
+		summarizeBy: none
+
+	partition 'Compound' = m
+		mode: import
+		source =
+			let
+				Source = Csv.Document(Binary.FromText("Q29tcG91bmQsT2Zmc2V0LERlZ3JhZGF0aW9uDQpTT0ZULC0wLjYsMC4wOQ0KTUVESVVNLDAuMCwwLjA1NQ0KSEFSRCwwLjQ1LDAuMDMNCg==", BinaryEncoding.Base64), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				Typed = Table.TransformColumnTypes(Headers, {{"Compound", type text}, {"Offset", type number}, {"Degradation", type number}}, "en-US")
+			in
+				Typed
