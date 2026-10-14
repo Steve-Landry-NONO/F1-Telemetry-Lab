@@ -33,378 +33,43 @@
   },
   "visualInteractions": [
     {
-      "source": "track",
-      "target": "elapsed",
-      "type": "NoFilter"
-    },
-    {
-      "source": "track",
-      "target": "throttle",
-      "type": "NoFilter"
-    },
-    {
-      "source": "track",
-      "target": "source",
-      "type": "NoFilter"
-    },
-    {
-      "source": "track",
+      "source": "gauge",
       "target": "brake",
       "type": "NoFilter"
     },
     {
-      "source": "track",
-      "target": "heading",
-      "type": "NoFilter"
-    },
-    {
-      "source": "track",
-      "target": "speedtrace",
-      "type": "NoFilter"
-    },
-    {
-      "source": "track",
-      "target": "progress",
-      "type": "NoFilter"
-    },
-    {
-      "source": "track",
-      "target": "pedals",
-      "type": "NoFilter"
-    },
-    {
-      "source": "track",
+      "source": "gauge",
       "target": "cursor",
       "type": "NoFilter"
     },
     {
-      "source": "track",
+      "source": "gauge",
       "target": "driver",
       "type": "NoFilter"
     },
     {
-      "source": "track",
-      "target": "pedalbars",
-      "type": "NoFilter"
-    },
-    {
-      "source": "track",
-      "target": "gear",
-      "type": "NoFilter"
-    },
-    {
-      "source": "track",
-      "target": "subtitle",
-      "type": "NoFilter"
-    },
-    {
-      "source": "track",
-      "target": "laptime",
-      "type": "NoFilter"
-    },
-    {
-      "source": "track",
-      "target": "gauge",
-      "type": "NoFilter"
-    },
-    {
-      "source": "track",
-      "target": "hint",
-      "type": "NoFilter"
-    },
-    {
-      "source": "speedtrace",
+      "source": "gauge",
       "target": "elapsed",
       "type": "NoFilter"
     },
     {
-      "source": "speedtrace",
-      "target": "throttle",
-      "type": "NoFilter"
-    },
-    {
-      "source": "speedtrace",
-      "target": "source",
-      "type": "NoFilter"
-    },
-    {
-      "source": "speedtrace",
-      "target": "brake",
-      "type": "NoFilter"
-    },
-    {
-      "source": "speedtrace",
-      "target": "heading",
-      "type": "NoFilter"
-    },
-    {
-      "source": "speedtrace",
-      "target": "track",
-      "type": "NoFilter"
-    },
-    {
-      "source": "speedtrace",
-      "target": "progress",
-      "type": "NoFilter"
-    },
-    {
-      "source": "speedtrace",
-      "target": "pedals",
-      "type": "NoFilter"
-    },
-    {
-      "source": "speedtrace",
-      "target": "cursor",
-      "type": "NoFilter"
-    },
-    {
-      "source": "speedtrace",
-      "target": "driver",
-      "type": "NoFilter"
-    },
-    {
-      "source": "speedtrace",
-      "target": "pedalbars",
-      "type": "NoFilter"
-    },
-    {
-      "source": "speedtrace",
+      "source": "gauge",
       "target": "gear",
       "type": "NoFilter"
     },
     {
-      "source": "speedtrace",
-      "target": "subtitle",
-      "type": "NoFilter"
-    },
-    {
-      "source": "speedtrace",
-      "target": "laptime",
-      "type": "NoFilter"
-    },
-    {
-      "source": "speedtrace",
-      "target": "gauge",
-      "type": "NoFilter"
-    },
-    {
-      "source": "speedtrace",
-      "target": "hint",
-      "type": "NoFilter"
-    },
-    {
-      "source": "pedals",
-      "target": "elapsed",
-      "type": "NoFilter"
-    },
-    {
-      "source": "pedals",
-      "target": "throttle",
-      "type": "NoFilter"
-    },
-    {
-      "source": "pedals",
-      "target": "source",
-      "type": "NoFilter"
-    },
-    {
-      "source": "pedals",
-      "target": "brake",
-      "type": "NoFilter"
-    },
-    {
-      "source": "pedals",
+      "source": "gauge",
       "target": "heading",
       "type": "NoFilter"
     },
     {
-      "source": "pedals",
-      "target": "track",
-      "type": "NoFilter"
-    },
-    {
-      "source": "pedals",
-      "target": "speedtrace",
-      "type": "NoFilter"
-    },
-    {
-      "source": "pedals",
-      "target": "progress",
-      "type": "NoFilter"
-    },
-    {
-      "source": "pedals",
-      "target": "cursor",
-      "type": "NoFilter"
-    },
-    {
-      "source": "pedals",
-      "target": "driver",
-      "type": "NoFilter"
-    },
-    {
-      "source": "pedals",
-      "target": "pedalbars",
-      "type": "NoFilter"
-    },
-    {
-      "source": "pedals",
-      "target": "gear",
-      "type": "NoFilter"
-    },
-    {
-      "source": "pedals",
-      "target": "subtitle",
-      "type": "NoFilter"
-    },
-    {
-      "source": "pedals",
-      "target": "laptime",
-      "type": "NoFilter"
-    },
-    {
-      "source": "pedals",
-      "target": "gauge",
-      "type": "NoFilter"
-    },
-    {
-      "source": "pedals",
-      "target": "hint",
-      "type": "NoFilter"
-    },
-    {
-      "source": "pedalbars",
-      "target": "elapsed",
-      "type": "NoFilter"
-    },
-    {
-      "source": "pedalbars",
-      "target": "throttle",
-      "type": "NoFilter"
-    },
-    {
-      "source": "pedalbars",
-      "target": "source",
-      "type": "NoFilter"
-    },
-    {
-      "source": "pedalbars",
-      "target": "brake",
-      "type": "NoFilter"
-    },
-    {
-      "source": "pedalbars",
-      "target": "heading",
-      "type": "NoFilter"
-    },
-    {
-      "source": "pedalbars",
-      "target": "track",
-      "type": "NoFilter"
-    },
-    {
-      "source": "pedalbars",
-      "target": "speedtrace",
-      "type": "NoFilter"
-    },
-    {
-      "source": "pedalbars",
-      "target": "progress",
-      "type": "NoFilter"
-    },
-    {
-      "source": "pedalbars",
-      "target": "pedals",
-      "type": "NoFilter"
-    },
-    {
-      "source": "pedalbars",
-      "target": "cursor",
-      "type": "NoFilter"
-    },
-    {
-      "source": "pedalbars",
-      "target": "driver",
-      "type": "NoFilter"
-    },
-    {
-      "source": "pedalbars",
-      "target": "gear",
-      "type": "NoFilter"
-    },
-    {
-      "source": "pedalbars",
-      "target": "subtitle",
-      "type": "NoFilter"
-    },
-    {
-      "source": "pedalbars",
-      "target": "laptime",
-      "type": "NoFilter"
-    },
-    {
-      "source": "pedalbars",
-      "target": "gauge",
-      "type": "NoFilter"
-    },
-    {
-      "source": "pedalbars",
+      "source": "gauge",
       "target": "hint",
       "type": "NoFilter"
     },
     {
       "source": "gauge",
-      "target": "elapsed",
-      "type": "NoFilter"
-    },
-    {
-      "source": "gauge",
-      "target": "throttle",
-      "type": "NoFilter"
-    },
-    {
-      "source": "gauge",
-      "target": "source",
-      "type": "NoFilter"
-    },
-    {
-      "source": "gauge",
-      "target": "brake",
-      "type": "NoFilter"
-    },
-    {
-      "source": "gauge",
-      "target": "heading",
-      "type": "NoFilter"
-    },
-    {
-      "source": "gauge",
-      "target": "track",
-      "type": "NoFilter"
-    },
-    {
-      "source": "gauge",
-      "target": "speedtrace",
-      "type": "NoFilter"
-    },
-    {
-      "source": "gauge",
-      "target": "progress",
-      "type": "NoFilter"
-    },
-    {
-      "source": "gauge",
-      "target": "pedals",
-      "type": "NoFilter"
-    },
-    {
-      "source": "gauge",
-      "target": "cursor",
-      "type": "NoFilter"
-    },
-    {
-      "source": "gauge",
-      "target": "driver",
+      "target": "laptime",
       "type": "NoFilter"
     },
     {
@@ -414,7 +79,22 @@
     },
     {
       "source": "gauge",
-      "target": "gear",
+      "target": "pedals",
+      "type": "NoFilter"
+    },
+    {
+      "source": "gauge",
+      "target": "progress",
+      "type": "NoFilter"
+    },
+    {
+      "source": "gauge",
+      "target": "source",
+      "type": "NoFilter"
+    },
+    {
+      "source": "gauge",
+      "target": "speedtrace",
       "type": "NoFilter"
     },
     {
@@ -424,12 +104,332 @@
     },
     {
       "source": "gauge",
-      "target": "laptime",
+      "target": "throttle",
       "type": "NoFilter"
     },
     {
       "source": "gauge",
+      "target": "track",
+      "type": "NoFilter"
+    },
+    {
+      "source": "pedalbars",
+      "target": "brake",
+      "type": "NoFilter"
+    },
+    {
+      "source": "pedalbars",
+      "target": "cursor",
+      "type": "NoFilter"
+    },
+    {
+      "source": "pedalbars",
+      "target": "driver",
+      "type": "NoFilter"
+    },
+    {
+      "source": "pedalbars",
+      "target": "elapsed",
+      "type": "NoFilter"
+    },
+    {
+      "source": "pedalbars",
+      "target": "gauge",
+      "type": "NoFilter"
+    },
+    {
+      "source": "pedalbars",
+      "target": "gear",
+      "type": "NoFilter"
+    },
+    {
+      "source": "pedalbars",
+      "target": "heading",
+      "type": "NoFilter"
+    },
+    {
+      "source": "pedalbars",
       "target": "hint",
+      "type": "NoFilter"
+    },
+    {
+      "source": "pedalbars",
+      "target": "laptime",
+      "type": "NoFilter"
+    },
+    {
+      "source": "pedalbars",
+      "target": "pedals",
+      "type": "NoFilter"
+    },
+    {
+      "source": "pedalbars",
+      "target": "progress",
+      "type": "NoFilter"
+    },
+    {
+      "source": "pedalbars",
+      "target": "source",
+      "type": "NoFilter"
+    },
+    {
+      "source": "pedalbars",
+      "target": "speedtrace",
+      "type": "NoFilter"
+    },
+    {
+      "source": "pedalbars",
+      "target": "subtitle",
+      "type": "NoFilter"
+    },
+    {
+      "source": "pedalbars",
+      "target": "throttle",
+      "type": "NoFilter"
+    },
+    {
+      "source": "pedalbars",
+      "target": "track",
+      "type": "NoFilter"
+    },
+    {
+      "source": "pedals",
+      "target": "brake",
+      "type": "NoFilter"
+    },
+    {
+      "source": "pedals",
+      "target": "cursor",
+      "type": "NoFilter"
+    },
+    {
+      "source": "pedals",
+      "target": "driver",
+      "type": "NoFilter"
+    },
+    {
+      "source": "pedals",
+      "target": "elapsed",
+      "type": "NoFilter"
+    },
+    {
+      "source": "pedals",
+      "target": "gauge",
+      "type": "NoFilter"
+    },
+    {
+      "source": "pedals",
+      "target": "gear",
+      "type": "NoFilter"
+    },
+    {
+      "source": "pedals",
+      "target": "heading",
+      "type": "NoFilter"
+    },
+    {
+      "source": "pedals",
+      "target": "hint",
+      "type": "NoFilter"
+    },
+    {
+      "source": "pedals",
+      "target": "laptime",
+      "type": "NoFilter"
+    },
+    {
+      "source": "pedals",
+      "target": "pedalbars",
+      "type": "NoFilter"
+    },
+    {
+      "source": "pedals",
+      "target": "progress",
+      "type": "NoFilter"
+    },
+    {
+      "source": "pedals",
+      "target": "source",
+      "type": "NoFilter"
+    },
+    {
+      "source": "pedals",
+      "target": "speedtrace",
+      "type": "NoFilter"
+    },
+    {
+      "source": "pedals",
+      "target": "subtitle",
+      "type": "NoFilter"
+    },
+    {
+      "source": "pedals",
+      "target": "throttle",
+      "type": "NoFilter"
+    },
+    {
+      "source": "pedals",
+      "target": "track",
+      "type": "NoFilter"
+    },
+    {
+      "source": "speedtrace",
+      "target": "brake",
+      "type": "NoFilter"
+    },
+    {
+      "source": "speedtrace",
+      "target": "cursor",
+      "type": "NoFilter"
+    },
+    {
+      "source": "speedtrace",
+      "target": "driver",
+      "type": "NoFilter"
+    },
+    {
+      "source": "speedtrace",
+      "target": "elapsed",
+      "type": "NoFilter"
+    },
+    {
+      "source": "speedtrace",
+      "target": "gauge",
+      "type": "NoFilter"
+    },
+    {
+      "source": "speedtrace",
+      "target": "gear",
+      "type": "NoFilter"
+    },
+    {
+      "source": "speedtrace",
+      "target": "heading",
+      "type": "NoFilter"
+    },
+    {
+      "source": "speedtrace",
+      "target": "hint",
+      "type": "NoFilter"
+    },
+    {
+      "source": "speedtrace",
+      "target": "laptime",
+      "type": "NoFilter"
+    },
+    {
+      "source": "speedtrace",
+      "target": "pedalbars",
+      "type": "NoFilter"
+    },
+    {
+      "source": "speedtrace",
+      "target": "pedals",
+      "type": "NoFilter"
+    },
+    {
+      "source": "speedtrace",
+      "target": "progress",
+      "type": "NoFilter"
+    },
+    {
+      "source": "speedtrace",
+      "target": "source",
+      "type": "NoFilter"
+    },
+    {
+      "source": "speedtrace",
+      "target": "subtitle",
+      "type": "NoFilter"
+    },
+    {
+      "source": "speedtrace",
+      "target": "throttle",
+      "type": "NoFilter"
+    },
+    {
+      "source": "speedtrace",
+      "target": "track",
+      "type": "NoFilter"
+    },
+    {
+      "source": "track",
+      "target": "brake",
+      "type": "NoFilter"
+    },
+    {
+      "source": "track",
+      "target": "cursor",
+      "type": "NoFilter"
+    },
+    {
+      "source": "track",
+      "target": "driver",
+      "type": "NoFilter"
+    },
+    {
+      "source": "track",
+      "target": "elapsed",
+      "type": "NoFilter"
+    },
+    {
+      "source": "track",
+      "target": "gauge",
+      "type": "NoFilter"
+    },
+    {
+      "source": "track",
+      "target": "gear",
+      "type": "NoFilter"
+    },
+    {
+      "source": "track",
+      "target": "heading",
+      "type": "NoFilter"
+    },
+    {
+      "source": "track",
+      "target": "hint",
+      "type": "NoFilter"
+    },
+    {
+      "source": "track",
+      "target": "laptime",
+      "type": "NoFilter"
+    },
+    {
+      "source": "track",
+      "target": "pedalbars",
+      "type": "NoFilter"
+    },
+    {
+      "source": "track",
+      "target": "pedals",
+      "type": "NoFilter"
+    },
+    {
+      "source": "track",
+      "target": "progress",
+      "type": "NoFilter"
+    },
+    {
+      "source": "track",
+      "target": "source",
+      "type": "NoFilter"
+    },
+    {
+      "source": "track",
+      "target": "speedtrace",
+      "type": "NoFilter"
+    },
+    {
+      "source": "track",
+      "target": "subtitle",
+      "type": "NoFilter"
+    },
+    {
+      "source": "track",
+      "target": "throttle",
       "type": "NoFilter"
     }
   ]

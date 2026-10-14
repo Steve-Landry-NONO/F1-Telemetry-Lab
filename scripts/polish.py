@@ -150,7 +150,7 @@ def render_layout(report, api, drivers):
     # Charts cannot filter the controls or other visuals: only the controls drive the story.
     for n in names:
         p=pages/n
-        definitions=[__import__("json").loads(f.read_text()) for f in (p/"visuals").glob("*/visual.json")]
+        definitions=[__import__("json").loads(f.read_text()) for f in sorted((p/"visuals").glob("*/visual.json"))]
         charts=[v["name"] for v in definitions if v["visual"]["visualType"] in ("lineChart","scatterChart","gauge","tableEx")]
         data=__import__("json").loads((p/"page.json").read_text())
         data["visualInteractions"]=[{"source":source,"target":v["name"],"type":"NoFilter"}

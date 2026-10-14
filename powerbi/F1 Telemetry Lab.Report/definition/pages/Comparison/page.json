@@ -33,98 +33,8 @@
   },
   "visualInteractions": [
     {
-      "source": "deltatrace",
-      "target": "timeA",
-      "type": "NoFilter"
-    },
-    {
-      "source": "deltatrace",
-      "target": "lapA",
-      "type": "NoFilter"
-    },
-    {
-      "source": "deltatrace",
-      "target": "lapB",
-      "type": "NoFilter"
-    },
-    {
-      "source": "deltatrace",
-      "target": "source",
-      "type": "NoFilter"
-    },
-    {
-      "source": "deltatrace",
-      "target": "heading",
-      "type": "NoFilter"
-    },
-    {
-      "source": "deltatrace",
-      "target": "compare",
-      "type": "NoFilter"
-    },
-    {
-      "source": "deltatrace",
-      "target": "timeB",
-      "type": "NoFilter"
-    },
-    {
-      "source": "deltatrace",
-      "target": "sector2",
-      "type": "NoFilter"
-    },
-    {
-      "source": "deltatrace",
+      "source": "compare",
       "target": "delta",
-      "type": "NoFilter"
-    },
-    {
-      "source": "deltatrace",
-      "target": "insight",
-      "type": "NoFilter"
-    },
-    {
-      "source": "deltatrace",
-      "target": "sector3",
-      "type": "NoFilter"
-    },
-    {
-      "source": "deltatrace",
-      "target": "sector1",
-      "type": "NoFilter"
-    },
-    {
-      "source": "deltatrace",
-      "target": "subtitle",
-      "type": "NoFilter"
-    },
-    {
-      "source": "deltatrace",
-      "target": "hint",
-      "type": "NoFilter"
-    },
-    {
-      "source": "compare",
-      "target": "timeA",
-      "type": "NoFilter"
-    },
-    {
-      "source": "compare",
-      "target": "lapA",
-      "type": "NoFilter"
-    },
-    {
-      "source": "compare",
-      "target": "lapB",
-      "type": "NoFilter"
-    },
-    {
-      "source": "compare",
-      "target": "source",
-      "type": "NoFilter"
-    },
-    {
-      "source": "compare",
-      "target": "heading",
       "type": "NoFilter"
     },
     {
@@ -134,17 +44,12 @@
     },
     {
       "source": "compare",
-      "target": "timeB",
+      "target": "heading",
       "type": "NoFilter"
     },
     {
       "source": "compare",
-      "target": "sector2",
-      "type": "NoFilter"
-    },
-    {
-      "source": "compare",
-      "target": "delta",
+      "target": "hint",
       "type": "NoFilter"
     },
     {
@@ -154,7 +59,12 @@
     },
     {
       "source": "compare",
-      "target": "sector3",
+      "target": "lapA",
+      "type": "NoFilter"
+    },
+    {
+      "source": "compare",
+      "target": "lapB",
       "type": "NoFilter"
     },
     {
@@ -164,12 +74,102 @@
     },
     {
       "source": "compare",
+      "target": "sector2",
+      "type": "NoFilter"
+    },
+    {
+      "source": "compare",
+      "target": "sector3",
+      "type": "NoFilter"
+    },
+    {
+      "source": "compare",
+      "target": "source",
+      "type": "NoFilter"
+    },
+    {
+      "source": "compare",
       "target": "subtitle",
       "type": "NoFilter"
     },
     {
       "source": "compare",
+      "target": "timeA",
+      "type": "NoFilter"
+    },
+    {
+      "source": "compare",
+      "target": "timeB",
+      "type": "NoFilter"
+    },
+    {
+      "source": "deltatrace",
+      "target": "compare",
+      "type": "NoFilter"
+    },
+    {
+      "source": "deltatrace",
+      "target": "delta",
+      "type": "NoFilter"
+    },
+    {
+      "source": "deltatrace",
+      "target": "heading",
+      "type": "NoFilter"
+    },
+    {
+      "source": "deltatrace",
       "target": "hint",
+      "type": "NoFilter"
+    },
+    {
+      "source": "deltatrace",
+      "target": "insight",
+      "type": "NoFilter"
+    },
+    {
+      "source": "deltatrace",
+      "target": "lapA",
+      "type": "NoFilter"
+    },
+    {
+      "source": "deltatrace",
+      "target": "lapB",
+      "type": "NoFilter"
+    },
+    {
+      "source": "deltatrace",
+      "target": "sector1",
+      "type": "NoFilter"
+    },
+    {
+      "source": "deltatrace",
+      "target": "sector2",
+      "type": "NoFilter"
+    },
+    {
+      "source": "deltatrace",
+      "target": "sector3",
+      "type": "NoFilter"
+    },
+    {
+      "source": "deltatrace",
+      "target": "source",
+      "type": "NoFilter"
+    },
+    {
+      "source": "deltatrace",
+      "target": "subtitle",
+      "type": "NoFilter"
+    },
+    {
+      "source": "deltatrace",
+      "target": "timeA",
+      "type": "NoFilter"
+    },
+    {
+      "source": "deltatrace",
+      "target": "timeB",
       "type": "NoFilter"
     }
   ]

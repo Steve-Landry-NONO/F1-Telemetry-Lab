@@ -34,27 +34,7 @@
   "visualInteractions": [
     {
       "source": "candidates",
-      "target": "penalty",
-      "type": "NoFilter"
-    },
-    {
-      "source": "candidates",
-      "target": "total",
-      "type": "NoFilter"
-    },
-    {
-      "source": "candidates",
-      "target": "source",
-      "type": "NoFilter"
-    },
-    {
-      "source": "candidates",
-      "target": "heading",
-      "type": "NoFilter"
-    },
-    {
-      "source": "candidates",
-      "target": "FirstCompound",
+      "target": "BasePace",
       "type": "NoFilter"
     },
     {
@@ -64,12 +44,27 @@
     },
     {
       "source": "candidates",
-      "target": "status",
+      "target": "FirstCompound",
       "type": "NoFilter"
     },
     {
       "source": "candidates",
       "target": "PitLoss",
+      "type": "NoFilter"
+    },
+    {
+      "source": "candidates",
+      "target": "SecondCompound",
+      "type": "NoFilter"
+    },
+    {
+      "source": "candidates",
+      "target": "StopLap",
+      "type": "NoFilter"
+    },
+    {
+      "source": "candidates",
+      "target": "heading",
       "type": "NoFilter"
     },
     {
@@ -84,12 +79,7 @@
     },
     {
       "source": "candidates",
-      "target": "subtitle",
-      "type": "NoFilter"
-    },
-    {
-      "source": "candidates",
-      "target": "StopLap",
+      "target": "penalty",
       "type": "NoFilter"
     },
     {
@@ -99,12 +89,12 @@
     },
     {
       "source": "candidates",
-      "target": "SecondCompound",
+      "target": "source",
       "type": "NoFilter"
     },
     {
       "source": "candidates",
-      "target": "BasePace",
+      "target": "status",
       "type": "NoFilter"
     },
     {
@@ -113,33 +103,18 @@
       "type": "NoFilter"
     },
     {
-      "source": "plan",
-      "target": "penalty",
+      "source": "candidates",
+      "target": "subtitle",
       "type": "NoFilter"
     },
     {
-      "source": "plan",
-      "target": "candidates",
-      "type": "NoFilter"
-    },
-    {
-      "source": "plan",
+      "source": "candidates",
       "target": "total",
       "type": "NoFilter"
     },
     {
       "source": "plan",
-      "target": "source",
-      "type": "NoFilter"
-    },
-    {
-      "source": "plan",
-      "target": "heading",
-      "type": "NoFilter"
-    },
-    {
-      "source": "plan",
-      "target": "FirstCompound",
+      "target": "BasePace",
       "type": "NoFilter"
     },
     {
@@ -149,12 +124,32 @@
     },
     {
       "source": "plan",
-      "target": "status",
+      "target": "FirstCompound",
       "type": "NoFilter"
     },
     {
       "source": "plan",
       "target": "PitLoss",
+      "type": "NoFilter"
+    },
+    {
+      "source": "plan",
+      "target": "SecondCompound",
+      "type": "NoFilter"
+    },
+    {
+      "source": "plan",
+      "target": "StopLap",
+      "type": "NoFilter"
+    },
+    {
+      "source": "plan",
+      "target": "candidates",
+      "type": "NoFilter"
+    },
+    {
+      "source": "plan",
+      "target": "heading",
       "type": "NoFilter"
     },
     {
@@ -169,22 +164,17 @@
     },
     {
       "source": "plan",
-      "target": "subtitle",
+      "target": "penalty",
       "type": "NoFilter"
     },
     {
       "source": "plan",
-      "target": "StopLap",
+      "target": "source",
       "type": "NoFilter"
     },
     {
       "source": "plan",
-      "target": "SecondCompound",
-      "type": "NoFilter"
-    },
-    {
-      "source": "plan",
-      "target": "BasePace",
+      "target": "status",
       "type": "NoFilter"
     },
     {
@@ -193,33 +183,18 @@
       "type": "NoFilter"
     },
     {
-      "source": "stints",
-      "target": "penalty",
+      "source": "plan",
+      "target": "subtitle",
       "type": "NoFilter"
     },
     {
-      "source": "stints",
-      "target": "candidates",
-      "type": "NoFilter"
-    },
-    {
-      "source": "stints",
+      "source": "plan",
       "target": "total",
       "type": "NoFilter"
     },
     {
       "source": "stints",
-      "target": "source",
-      "type": "NoFilter"
-    },
-    {
-      "source": "stints",
-      "target": "heading",
-      "type": "NoFilter"
-    },
-    {
-      "source": "stints",
-      "target": "FirstCompound",
+      "target": "BasePace",
       "type": "NoFilter"
     },
     {
@@ -229,12 +204,32 @@
     },
     {
       "source": "stints",
-      "target": "status",
+      "target": "FirstCompound",
       "type": "NoFilter"
     },
     {
       "source": "stints",
       "target": "PitLoss",
+      "type": "NoFilter"
+    },
+    {
+      "source": "stints",
+      "target": "SecondCompound",
+      "type": "NoFilter"
+    },
+    {
+      "source": "stints",
+      "target": "StopLap",
+      "type": "NoFilter"
+    },
+    {
+      "source": "stints",
+      "target": "candidates",
+      "type": "NoFilter"
+    },
+    {
+      "source": "stints",
+      "target": "heading",
       "type": "NoFilter"
     },
     {
@@ -249,12 +244,7 @@
     },
     {
       "source": "stints",
-      "target": "subtitle",
-      "type": "NoFilter"
-    },
-    {
-      "source": "stints",
-      "target": "StopLap",
+      "target": "penalty",
       "type": "NoFilter"
     },
     {
@@ -264,12 +254,22 @@
     },
     {
       "source": "stints",
-      "target": "SecondCompound",
+      "target": "source",
       "type": "NoFilter"
     },
     {
       "source": "stints",
-      "target": "BasePace",
+      "target": "status",
+      "type": "NoFilter"
+    },
+    {
+      "source": "stints",
+      "target": "subtitle",
+      "type": "NoFilter"
+    },
+    {
+      "source": "stints",
+      "target": "total",
       "type": "NoFilter"
     }
   ]

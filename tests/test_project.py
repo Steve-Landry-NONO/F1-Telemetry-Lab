@@ -166,5 +166,10 @@ class ReportTests(unittest.TestCase):
             self.assertTrue(page["visualInteractions"])
             self.assertTrue(all(i["type"]=="NoFilter" for i in page["visualInteractions"]))
 
+    def test_interactions_have_canonical_order(self):
+        for path in (self.output/"F1 Telemetry Lab.Report/definition/pages").glob("*/page.json"):
+            interactions=json.loads(path.read_text())["visualInteractions"]
+            self.assertEqual(interactions,sorted(interactions,key=lambda i:(i["source"],i["target"])))
+
 
 if __name__=="__main__": unittest.main()
