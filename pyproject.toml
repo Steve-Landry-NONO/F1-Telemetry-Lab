@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "f1-telemetry-lab"
+version = "0.2.0"
+description = "Power BI telemetry replay, lap comparison and educational tyre strategy"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+real = ["fastf1>=3.6,<4", "numpy>=1.26,<3", "pandas>=2.2,<3"]
+validation = ["jsonschema>=4.23,<5"]
+preview = ["matplotlib>=3.8,<4"]
+
+[project.scripts]
+f1lab = "f1lab.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

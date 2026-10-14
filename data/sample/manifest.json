@@ -1,0 +1,17 @@
+{
+  "source": "fastf1",
+  "year": 2024,
+  "event": "Italy",
+  "session": "Q",
+  "drivers": [
+    "NOR",
+    "LEC"
+  ],
+  "fastf1_version": "3.8.3",
+  "processing": "501 normalized-distance bins; linear continuous channels, next-sample discrete channels; elapsed time endpoint correction; nominal Monza distance 5793m",
+  "sha256": {
+    "DimDistance.csv": "7be12e5889ff92b87496d6f392e78004acfa1514c0e93ad4e7fcbcf5a79c12b0",
+    "DimLap.csv": "88712406b844a38d8e7c7d45c2ee0c15b3ab7dbcda4927824c1735508568927c",
+    "FactTelemetry.csv": "e87d8b9b2da2129b0836091e6415812c66898f388d7ee3c798a9553bce77b31d"
+  }
+}

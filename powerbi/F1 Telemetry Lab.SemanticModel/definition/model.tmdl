@@ -1,0 +1,24 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+ref table 'BasePace'
+ref table 'CandidateStop'
+ref table 'Compound'
+ref table 'Degradation'
+ref table 'DimDistance'
+ref table 'DimLap'
+ref table 'FactTelemetry'
+ref table 'FirstCompound'
+ref table 'LapA'
+ref table 'LapB'
+ref table 'Metrics'
+ref table 'PitLoss'
+ref table 'RaceLap'
+ref table 'ReplayTime'
+ref table 'SecondCompound'
+ref table 'StopLap'

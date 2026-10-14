@@ -1,0 +1,343 @@
+table 'Metrics'
+
+	measure 'Selected bin' = ```
+			VAR chosenLap = SELECTEDVALUE(DimLap[LapId], 1)
+			VAR timeLimit = [Replay time request s] * 1000
+			VAR samples = CALCULATETABLE(FactTelemetry, REMOVEFILTERS(DimDistance), REMOVEFILTERS(FactTelemetry[SpeedBand]), TREATAS({chosenLap}, DimLap[LapId]))
+			RETURN COALESCE(MAXX(FILTER(samples, FactTelemetry[TimeMs] <= timeLimit), FactTelemetry[Bin]), 0)
+			```
+		formatString: 0
+
+	measure 'Selected driver' = ```
+			VAR chosenLap = SELECTEDVALUE(DimLap[LapId], 1)
+			RETURN CALCULATE(SELECTEDVALUE(DimLap[Driver]), TREATAS({chosenLap}, DimLap[LapId]))
+			```
+
+	measure 'Data source' = CONCATENATEX(VALUES(DimLap[Source]), DimLap[Source], ", ")
+
+	measure 'Session label' = CONCATENATEX(VALUES(DimLap[Session]), DimLap[Session], ", ")
+
+	measure 'Lap time s' = ```
+			VAR lap = SELECTEDVALUE(DimLap[LapId], 1)
+			RETURN CALCULATE(MAX(DimLap[LapTimeS]), TREATAS({lap}, DimLap[LapId]))
+			```
+		formatString: 0.000
+
+	measure 'Speed trace' = ```
+			VAR lap = SELECTEDVALUE(DimLap[LapId], 1)
+			RETURN CALCULATE(AVERAGE(FactTelemetry[SpeedKmh]), TREATAS({lap}, DimLap[LapId]))
+			```
+		formatString: 0.00
+
+	measure 'Throttle trace' = ```
+			VAR lap = SELECTEDVALUE(DimLap[LapId], 1)
+			RETURN CALCULATE(AVERAGE(FactTelemetry[ThrottlePct]), TREATAS({lap}, DimLap[LapId]))
+			```
+		formatString: 0.00
+
+	measure 'Brake trace' = ```
+			VAR lap = SELECTEDVALUE(DimLap[LapId], 1)
+			RETURN 100 * CALCULATE(AVERAGE(FactTelemetry[Brake]), TREATAS({lap}, DimLap[LapId]))
+			```
+		formatString: 0.00
+
+	measure 'Replay progress pct' = [Selected bin] / 5
+		formatString: 0.00
+
+	measure 'Current speed kmh' = ```
+			VAR lap = SELECTEDVALUE(DimLap[LapId], 1)
+			RETURN CALCULATE(MAX(FactTelemetry[SpeedKmh]), TREATAS({lap}, DimLap[LapId]), REMOVEFILTERS(DimDistance), TREATAS({[Selected bin]}, FactTelemetry[Bin]))
+			```
+		formatString: 0.00
+
+	measure 'Current throttle pct' = ```
+			VAR lap = SELECTEDVALUE(DimLap[LapId], 1)
+			RETURN CALCULATE(MAX(FactTelemetry[ThrottlePct]), TREATAS({lap}, DimLap[LapId]), REMOVEFILTERS(DimDistance), TREATAS({[Selected bin]}, FactTelemetry[Bin]))
+			```
+		formatString: 0.00
+
+	measure 'Current brake' = ```
+			VAR lap = SELECTEDVALUE(DimLap[LapId], 1)
+			RETURN CALCULATE(MAX(FactTelemetry[Brake]), TREATAS({lap}, DimLap[LapId]), REMOVEFILTERS(DimDistance), TREATAS({[Selected bin]}, FactTelemetry[Bin]))
+			```
+		formatString: 0
+
+	measure 'Current gear' = ```
+			VAR lap = SELECTEDVALUE(DimLap[LapId], 1)
+			RETURN CALCULATE(MAX(FactTelemetry[Gear]), TREATAS({lap}, DimLap[LapId]), REMOVEFILTERS(DimDistance), TREATAS({[Selected bin]}, FactTelemetry[Bin]))
+			```
+		formatString: 0
+
+	measure 'Current elapsed s' = ```
+			VAR lap = SELECTEDVALUE(DimLap[LapId], 1)
+			RETURN CALCULATE(MAX(FactTelemetry[TimeMs]), TREATAS({lap}, DimLap[LapId]), REMOVEFILTERS(DimDistance), TREATAS({[Selected bin]}, FactTelemetry[Bin])) / 1000
+			```
+		formatString: 0.000
+
+	measure 'Speed A' = ```
+			VAR lap = SELECTEDVALUE(LapA[LapId], 1)
+			RETURN CALCULATE(MAX(FactTelemetry[SpeedKmh]), REMOVEFILTERS(DimLap), TREATAS({lap}, DimLap[LapId]))
+			```
+		formatString: 0.00
+
+	measure 'Elapsed A' = ```
+			VAR lap = SELECTEDVALUE(LapA[LapId], 1)
+			RETURN CALCULATE(MAX(FactTelemetry[TimeMs]), REMOVEFILTERS(DimLap), TREATAS({lap}, DimLap[LapId])) / 1000
+			```
+		formatString: 0.00
+
+	measure 'Lap time A s' = ```
+			VAR lap = SELECTEDVALUE(LapA[LapId], 1)
+			RETURN CALCULATE(MAX(DimLap[LapTimeS]), REMOVEFILTERS(DimLap), TREATAS({lap}, DimLap[LapId]))
+			```
+		formatString: 0.000
+
+	measure 'Sector 1 A s' = ```
+			VAR lap = SELECTEDVALUE(LapA[LapId], 1)
+			RETURN CALCULATE(MAX(DimLap[S1]), REMOVEFILTERS(DimLap), TREATAS({lap}, DimLap[LapId]))
+			```
+		formatString: 0.000
+
+	measure 'Sector 2 A s' = ```
+			VAR lap = SELECTEDVALUE(LapA[LapId], 1)
+			RETURN CALCULATE(MAX(DimLap[S2]), REMOVEFILTERS(DimLap), TREATAS({lap}, DimLap[LapId]))
+			```
+		formatString: 0.000
+
+	measure 'Sector 3 A s' = ```
+			VAR lap = SELECTEDVALUE(LapA[LapId], 1)
+			RETURN CALCULATE(MAX(DimLap[S3]), REMOVEFILTERS(DimLap), TREATAS({lap}, DimLap[LapId]))
+			```
+		formatString: 0.000
+
+	measure 'Speed B' = ```
+			VAR lap = SELECTEDVALUE(LapB[LapId], 2)
+			RETURN CALCULATE(MAX(FactTelemetry[SpeedKmh]), REMOVEFILTERS(DimLap), TREATAS({lap}, DimLap[LapId]))
+			```
+		formatString: 0.00
+
+	measure 'Elapsed B' = ```
+			VAR lap = SELECTEDVALUE(LapB[LapId], 2)
+			RETURN CALCULATE(MAX(FactTelemetry[TimeMs]), REMOVEFILTERS(DimLap), TREATAS({lap}, DimLap[LapId])) / 1000
+			```
+		formatString: 0.00
+
+	measure 'Lap time B s' = ```
+			VAR lap = SELECTEDVALUE(LapB[LapId], 2)
+			RETURN CALCULATE(MAX(DimLap[LapTimeS]), REMOVEFILTERS(DimLap), TREATAS({lap}, DimLap[LapId]))
+			```
+		formatString: 0.000
+
+	measure 'Sector 1 B s' = ```
+			VAR lap = SELECTEDVALUE(LapB[LapId], 2)
+			RETURN CALCULATE(MAX(DimLap[S1]), REMOVEFILTERS(DimLap), TREATAS({lap}, DimLap[LapId]))
+			```
+		formatString: 0.000
+
+	measure 'Sector 2 B s' = ```
+			VAR lap = SELECTEDVALUE(LapB[LapId], 2)
+			RETURN CALCULATE(MAX(DimLap[S2]), REMOVEFILTERS(DimLap), TREATAS({lap}, DimLap[LapId]))
+			```
+		formatString: 0.000
+
+	measure 'Sector 3 B s' = ```
+			VAR lap = SELECTEDVALUE(LapB[LapId], 2)
+			RETURN CALCULATE(MAX(DimLap[S3]), REMOVEFILTERS(DimLap), TREATAS({lap}, DimLap[LapId]))
+			```
+		formatString: 0.000
+
+	measure 'Delta B minus A s' = [Elapsed B] - [Elapsed A]
+		formatString: 0.000
+
+	measure 'Lap delta s' = [Lap time B s] - [Lap time A s]
+		formatString: 0.000
+
+	measure 'Sector 1 delta s' = [Sector 1 B s] - [Sector 1 A s]
+		formatString: 0.000
+
+	measure 'Sector 2 delta s' = [Sector 2 B s] - [Sector 2 A s]
+		formatString: 0.000
+
+	measure 'Sector 3 delta s' = [Sector 3 B s] - [Sector 3 A s]
+		formatString: 0.000
+
+	measure 'Strategy status' = IF(SELECTEDVALUE(FirstCompound[Compound], "MEDIUM") = SELECTEDVALUE(SecondCompound[Compound], "HARD"), "Choisissez deux composés distincts pour ce scénario de course sèche.", "Simulation : un arrêt, deux composés, sans trafic, météo ni safety car.")
+
+	measure 'Strategy total s' = ```
+			VAR tyreOne = SELECTEDVALUE(FirstCompound[Compound], "MEDIUM")
+			VAR tyreTwo = SELECTEDVALUE(SecondCompound[Compound], "HARD")
+			VAR stop = SELECTEDVALUE(StopLap[Lap], 24)
+			VAR remaining = 53 - stop
+			VAR pit = SELECTEDVALUE(PitLoss[Seconds], 22)
+			VAR mult = SELECTEDVALUE(Degradation[Multiplier], 1)
+			VAR base = SELECTEDVALUE(BasePace[Seconds], 84)
+			VAR o1 = LOOKUPVALUE(Compound[Offset], Compound[Compound], tyreOne)
+			VAR o2 = LOOKUPVALUE(Compound[Offset], Compound[Compound], tyreTwo)
+			VAR d1 = LOOKUPVALUE(Compound[Degradation], Compound[Compound], tyreOne) * mult
+			VAR d2 = LOOKUPVALUE(Compound[Degradation], Compound[Compound], tyreTwo) * mult
+			RETURN IF(tyreOne <> tyreTwo, stop*(base+o1) + d1*stop*(stop-1)/2 + remaining*(base+o2) + d2*remaining*(remaining-1)/2 + pit)
+			```
+		formatString: 0.000
+
+	measure 'Strategy total min' = [Strategy total s] / 60
+		formatString: 0.00
+
+	measure 'Candidate total s' = ```
+			VAR stop = SELECTEDVALUE(CandidateStop[Lap])
+			RETURN IF(NOT ISBLANK(stop), CALCULATE([Strategy total s], REMOVEFILTERS(StopLap), TREATAS({stop}, StopLap[Lap])))
+			```
+		formatString: 0.000
+
+	measure 'Best stop lap' = ```
+			VAR candidates = ADDCOLUMNS(ALL(CandidateStop[Lap]), "Cost", [Candidate total s])
+			VAR best = TOPN(1, FILTER(candidates, NOT ISBLANK([Cost])), [Cost], ASC, CandidateStop[Lap], ASC)
+			RETURN MAXX(best, CandidateStop[Lap])
+			```
+		formatString: 0
+
+	measure 'Penalty vs best s' = ```
+			VAR candidates = ADDCOLUMNS(ALL(CandidateStop[Lap]), "Cost", [Candidate total s])
+			RETURN IF(NOT ISBLANK([Strategy total s]), [Strategy total s] - MINX(candidates, [Cost]))
+			```
+		formatString: 0.000
+
+	measure 'Simulated lap s' = ```
+			VAR lap = SELECTEDVALUE(RaceLap[Lap])
+			VAR stop = SELECTEDVALUE(StopLap[Lap], 24)
+			VAR tyreOne = SELECTEDVALUE(FirstCompound[Compound], "MEDIUM")
+			VAR tyreTwo = SELECTEDVALUE(SecondCompound[Compound], "HARD")
+			VAR chosenTyre = IF(lap <= stop, tyreOne, tyreTwo)
+			VAR age = IF(lap <= stop, lap - 1, lap - stop - 1)
+			VAR base = SELECTEDVALUE(BasePace[Seconds], 84)
+			VAR mult = SELECTEDVALUE(Degradation[Multiplier], 1)
+			RETURN IF(tyreOne <> tyreTwo && NOT ISBLANK(lap), base + LOOKUPVALUE(Compound[Offset], Compound[Compound], chosenTyre) + age * mult * LOOKUPVALUE(Compound[Degradation], Compound[Compound], chosenTyre) + IF(lap = stop, SELECTEDVALUE(PitLoss[Seconds], 22), 0))
+			```
+		formatString: 0.000
+
+	measure 'Track SVG' = ```
+			VAR lap = SELECTEDVALUE(DimLap[LapId], 1)
+			VAR bin = [Selected bin]
+			VAR points = CALCULATETABLE(FactTelemetry, REMOVEFILTERS(DimDistance), TREATAS({lap}, DimLap[LapId]))
+			VAR track = CONCATENATEX(points, FORMAT(FactTelemetry[SVGX], "0.0", "en-US") & "," & FORMAT(FactTelemetry[SVGY], "0.0", "en-US"), " ", FactTelemetry[Bin], ASC)
+			VAR x = MAXX(FILTER(points, FactTelemetry[Bin] = bin), FactTelemetry[SVGX])
+			VAR y = MAXX(FILTER(points, FactTelemetry[Bin] = bin), FactTelemetry[SVGY])
+			VAR svg = "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 460'><rect width='640' height='460' fill='#101826'/><polyline points='" & track & "' fill='none' stroke='#29374c' stroke-width='16' stroke-linejoin='round'/><polyline points='" & track & "' fill='none' stroke='#74f7ce' stroke-width='3'/><circle cx='" & FORMAT(x,"0.0","en-US") & "' cy='" & FORMAT(y,"0.0","en-US") & "' r='9' fill='#ff544f' stroke='white' stroke-width='3'/></svg>"
+			RETURN IF(NOT ISBLANK(lap), "data:image/svg+xml;utf8," & SUBSTITUTE(svg, "#", "%23"))
+			```
+		dataCategory: ImageUrl
+
+	measure 'Replay time request s' = IF(ISFILTERED(ReplayTime[Seconds]), MAX(ReplayTime[Seconds]), 30)
+		formatString: 0.000
+
+	measure 'Data health' = ```
+			VAR n = COUNTROWS(ALL(FactTelemetry))
+			RETURN IF(n = 1002, "2 tours | 1 002 points | " & CONCATENATEX(ALL(DimLap[Source]), DimLap[Source], ", "), "Actualiser pour charger les 2 tours")
+			```
+
+	measure 'Replay subtitle' = "MONZA 2024 / QUALIFICATIONS  ·  EXPLORER UN TOUR"
+
+	measure 'Comparison subtitle' = "MONZA 2024 / QUALIFICATIONS  ·  TROUVER LES ÉCARTS"
+
+	measure 'Strategy subtitle' = "MODÈLE PÉDAGOGIQUE / 53 TOURS  ·  TESTER UNE STRATÉGIE"
+
+	measure 'Track X' = ```
+			VAR chosenLap = SELECTEDVALUE(DimLap[LapId], 1)
+			RETURN CALCULATE(AVERAGE(FactTelemetry[SVGX]), TREATAS({chosenLap}, DimLap[LapId]))
+			```
+		formatString: 0.00
+
+	measure 'Track Y' = ```
+			VAR chosenLap = SELECTEDVALUE(DimLap[LapId], 1)
+			VAR coordinate = CALCULATE(AVERAGE(FactTelemetry[SVGY]), TREATAS({chosenLap}, DimLap[LapId]))
+			RETURN IF(NOT ISBLANK(coordinate), 460 - coordinate)
+			```
+		formatString: 0.00
+
+	measure 'Track marker size' = IF(NOT ISBLANK([Track X]), IF(SELECTEDVALUE(DimDistance[Bin]) = [Selected bin], 80, 2))
+		formatString: 0.00
+
+	measure 'Replay speed cursor' = IF(SELECTEDVALUE(DimDistance[Bin]) = [Selected bin], [Speed trace])
+		formatString: 0.00
+
+	measure 'Elapsed trace s' = ```
+			VAR chosenLap = SELECTEDVALUE(DimLap[LapId], 1)
+			RETURN CALCULATE(MAX(FactTelemetry[TimeMs]), TREATAS({chosenLap}, DimLap[LapId])) / 1000
+			```
+		formatString: 0.000
+
+	measure 'Top speed kmh' = ```
+			VAR chosenLap = SELECTEDVALUE(DimLap[LapId], 1)
+			RETURN CALCULATE(MAX(FactTelemetry[SpeedKmh]), REMOVEFILTERS(DimDistance), TREATAS({chosenLap}, DimLap[LapId]))
+			```
+		formatString: 0.00
+
+	measure 'Replay instruction' = "Déplacez le chrono : le point agrandi indique la position. Les couleurs distinguent freinage et vitesse."
+
+	measure 'Replay heading' = "F1 TELEMETRY LAB / PIT WALL"
+
+	measure 'Comparison insight' = ```
+			VAR gap = [Lap delta s]
+			VAR driverA = SELECTEDVALUE(LapA[Driver], "NOR")
+			VAR driverB = SELECTEDVALUE(LapB[Driver], "LEC")
+			RETURN IF(ISBLANK(gap), "Actualiser les données", IF(driverA = driverB, "Même pilote : courbes superposées, écarts nuls.", IF(gap >= 0, driverA & " gagne " & FORMAT(gap, "0.000", "fr-FR") & " s sur " & driverB, driverB & " gagne " & FORMAT(-gap, "0.000", "fr-FR") & " s sur " & driverA)))
+			```
+
+	measure 'Comparison instruction' = "Delta B - A : positif = B plus lent ; négatif = B plus rapide. Comparaison au même pourcentage du circuit."
+
+	measure 'Strategy insight' = ```
+			VAR selectedStop = SELECTEDVALUE(StopLap[Lap], 24)
+			VAR loss = [Penalty vs best s]
+			RETURN IF(ISBLANK([Strategy total s]), "Scénario invalide : deux composés distincts sont requis.", "Arrêt choisi : tour " & selectedStop & " | meilleur candidat : tour " & FORMAT([Best stop lap], "0") & " | écart : " & FORMAT(loss, "0.00", "fr-FR") & " s")
+			```
+
+	measure 'Strategy time label' = ```
+			VAR total = [Strategy total s]
+			RETURN IF(NOT ISBLANK(total), FORMAT(INT(total / 60), "0") & " min " & FORMAT(MOD(total, 60), "00.0", "fr-FR") & " s")
+			```
+
+	measure 'Optimal simulated lap s' = ```
+			VAR bestLap = [Best stop lap]
+			RETURN IF(NOT ISBLANK(bestLap), CALCULATE([Simulated lap s], REMOVEFILTERS(StopLap), TREATAS({bestLap}, StopLap[Lap])))
+			```
+		formatString: 0.000
+
+	measure 'Candidate penalty s' = IF(NOT ISBLANK([Candidate total s]), [Candidate total s] - ([Strategy total s] - [Penalty vs best s]))
+		formatString: 0.000
+
+	measure 'Chosen stop penalty s' = IF(SELECTEDVALUE(CandidateStop[Lap]) = SELECTEDVALUE(StopLap[Lap], 24), [Candidate penalty s])
+		formatString: 0.000
+
+	measure 'Pedals SVG' = ```
+			VAR throttle = COALESCE([Current throttle pct], 0)
+			VAR braking = COALESCE([Current brake], 0)
+			VAR svg = "<svg xmlns='http://www.w3.org/2000/svg' width='600' height='118' viewBox='0 0 600 118'><rect width='600' height='118' fill='#101826'/><g font-family='Segoe UI,Arial' fill='#a5b4cc' font-size='15'><text x='18' y='25'>ACCÉLÉRATEUR</text><text x='18' y='83'>FREIN</text></g><rect x='165' y='10' width='330' height='26' rx='5' fill='#253146'/><rect x='165' y='10' width='" & FORMAT(throttle * 3.3, "0.0", "en-US") & "' height='26' rx='5' fill='#74f7ce'/><rect x='165' y='68' width='330' height='26' rx='5' fill='#253146'/><rect x='165' y='68' width='" & FORMAT(braking * 330, "0.0", "en-US") & "' height='26' rx='5' fill='#ff544f'/><g font-family='Segoe UI,Arial' fill='white' font-size='24' font-weight='bold'><text x='515' y='32'>" & FORMAT(throttle, "0") & "%</text><text x='515' y='92'>" & IF(braking = 1, "ON", "OFF") & "</text></g></svg>"
+			RETURN IF(COUNTROWS(ALL(FactTelemetry)) > 0, "data:image/svg+xml;utf8," & SUBSTITUTE(svg, "#", "%23"))
+			```
+		dataCategory: ImageUrl
+
+	measure 'Stint plan SVG' = ```
+			VAR tyreOne = SELECTEDVALUE(FirstCompound[Compound], "MEDIUM")
+			VAR tyreTwo = SELECTEDVALUE(SecondCompound[Compound], "HARD")
+			VAR selectedStop = SELECTEDVALUE(StopLap[Lap], 24)
+			VAR split = 1140 * selectedStop / 53
+			VAR colorOne = SWITCH(tyreOne, "SOFT", "#ff544f", "MEDIUM", "#ffce62", "#eef4ff")
+			VAR colorTwo = SWITCH(tyreTwo, "SOFT", "#ff544f", "MEDIUM", "#ffce62", "#eef4ff")
+			VAR svg = "<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='108' viewBox='0 0 1200 108'><rect width='1200' height='108' fill='#101826'/><g font-family='Segoe UI,Arial' font-size='20' fill='white'><text x='30' y='28'>" & tyreOne & " / " & selectedStop & " tours</text><text x='1170' y='28' text-anchor='end'>" & tyreTwo & " / " & (53-selectedStop) & " tours</text></g><rect x='30' y='43' width='" & FORMAT(split, "0.0", "en-US") & "' height='23' fill='" & colorOne & "'/><rect x='" & FORMAT(30+split, "0.0", "en-US") & "' y='43' width='" & FORMAT(1140-split, "0.0", "en-US") & "' height='23' fill='" & colorTwo & "'/><line x1='" & FORMAT(30+split, "0.0", "en-US") & "' x2='" & FORMAT(30+split, "0.0", "en-US") & "' y1='35' y2='77' stroke='#759bff' stroke-width='4'/><g font-family='Segoe UI,Arial' font-size='15' fill='#a5b4cc'><text x='30' y='97'>DÉPART / TOUR 1</text><text x='600' y='97' text-anchor='middle'>ARRÊT APRÈS LE TOUR " & selectedStop & "</text><text x='1170' y='97' text-anchor='end'>ARRIVÉE / TOUR 53</text></g></svg>"
+			RETURN IF(tyreOne <> tyreTwo, "data:image/svg+xml;utf8," & SUBSTITUTE(svg, "#", "%23"))
+			```
+		dataCategory: ImageUrl
+
+	column 'Anchor'
+		dataType: int64
+		sourceColumn: Anchor
+		summarizeBy: none
+
+	partition 'Metrics' = m
+		mode: import
+		source =
+			let
+				Source = Csv.Document(Binary.FromText("QW5jaG9yDQoxDQo=", BinaryEncoding.Base64), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				Typed = Table.TransformColumnTypes(Headers, {{"Anchor", Int64.Type}}, "en-US")
+			in
+				Typed

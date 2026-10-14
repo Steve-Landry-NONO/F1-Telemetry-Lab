@@ -1,0 +1,16 @@
+table 'PitLoss'
+
+	column 'Seconds'
+		dataType: int64
+		sourceColumn: Seconds
+		summarizeBy: none
+
+	partition 'PitLoss' = m
+		mode: import
+		source =
+			let
+				Source = Csv.Document(Binary.FromText("U2Vjb25kcw0KMTUNCjE2DQoxNw0KMTgNCjE5DQoyMA0KMjENCjIyDQoyMw0KMjQNCjI1DQoyNg0KMjcNCjI4DQoyOQ0KMzANCjMxDQozMg0KMzMNCjM0DQozNQ0K", BinaryEncoding.Base64), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				Typed = Table.TransformColumnTypes(Headers, {{"Seconds", Int64.Type}}, "en-US")
+			in
+				Typed

@@ -1,0 +1,3 @@
+database 'F1 Telemetry Lab'
+	compatibilityLevel: 1600
+	compatibilityMode: powerBI
