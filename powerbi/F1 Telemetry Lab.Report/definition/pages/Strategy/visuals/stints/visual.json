@@ -3,11 +3,11 @@
   "name": "stints",
   "position": {
     "x": 24,
-    "y": 455,
+    "y": 580,
     "width": 760,
-    "height": 410,
+    "height": 214,
     "z": 1,
-    "tabOrder": 12
+    "tabOrder": 14
   },
   "visual": {
     "visualType": "lineChart",
@@ -26,21 +26,21 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'SIMULATED LAP TIME · pit loss charged to in-lap'"
+                  "Value": "'RYTHME PAR TOUR · stratégie choisie / optimale'"
                 }
               }
             },
             "fontColor": {
               "expr": {
                 "Literal": {
-                  "Value": "'#eef4ff'"
+                  "Value": "'#a5b4cc'"
                 }
               }
             },
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "12D"
+                  "Value": "14D"
                 }
               }
             },
@@ -125,7 +125,7 @@
             "altText": {
               "expr": {
                 "Literal": {
-                  "Value": "'SIMULATED LAP TIME · pit loss charged to in-lap'"
+                  "Value": "'RYTHME PAR TOUR · stratégie choisie / optimale'"
                 }
               }
             }
@@ -168,6 +168,20 @@
               },
               "queryRef": "Metrics.Simulated lap s",
               "nativeQueryRef": "Simulated lap s"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Metrics"
+                    }
+                  },
+                  "Property": "Optimal simulated lap s"
+                }
+              },
+              "queryRef": "Metrics.Optimal simulated lap s",
+              "nativeQueryRef": "Optimal simulated lap s"
             }
           ]
         }
@@ -248,6 +262,13 @@
                   "Value": "'#eef4ff'"
                 }
               }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "11D"
+                }
+              }
             }
           }
         }
@@ -261,7 +282,52 @@
                   "Value": "3D"
                 }
               }
+            },
+            "showMarker": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
             }
+          }
+        }
+      ],
+      "dataPoint": [
+        {
+          "properties": {
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#74f7ce'"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Metrics.Simulated lap s"
+          }
+        },
+        {
+          "properties": {
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#ff544f'"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Metrics.Optimal simulated lap s"
           }
         }
       ]

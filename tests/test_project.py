@@ -13,6 +13,7 @@ sys.path.insert(0,str(ROOT/"scripts"))
 from f1lab.data import demo, validate
 from f1lab.strategy import COMPOUNDS, simulate, optimal_stop
 from build_powerbi import build, measures
+from checkpoints import expected
 
 
 class DataTests(unittest.TestCase):
@@ -120,6 +121,50 @@ class ReportTests(unittest.TestCase):
         for text in measures().values():
             for name in re.findall(r"\bVAR\s+(\w+)",text):
                 self.assertNotIn(name.lower(),tables)
+
+    def test_defaults_are_saved_in_slicers(self):
+        defaults={"driver":"NOR","lapA":"NOR","lapB":"LEC","FirstCompound":"MEDIUM","SecondCompound":"HARD",
+                  "StopLap":"24L","PitLoss":"22L","Degradation":"1L","BasePace":"84L"}
+        for path in self.output.rglob("visual.json"):
+            v=json.loads(path.read_text())
+            if v["name"] not in defaults: continue
+            filt=v["visual"]["objects"]["general"][0]["properties"]["filter"]["filter"]
+            value=filt["Where"][0]["Condition"]["In"]["Values"][0][0]["Literal"]["Value"].strip("'")
+            self.assertEqual(value,defaults[v["name"]])
+
+    def test_slider_uses_elapsed_time_and_before_filter(self):
+        v=json.loads((self.output/"F1 Telemetry Lab.Report/definition/pages/Replay/visuals/cursor/visual.json").read_text())
+        self.assertEqual(v["visual"]["objects"]["data"][0]["properties"]["mode"]["expr"]["Literal"]["Value"],"'Before'")
+        cond=v["visual"]["objects"]["general"][0]["properties"]["filter"]["filter"]["Where"][0]["Condition"]["Comparison"]
+        self.assertEqual(cond["ComparisonKind"],4)
+        self.assertIn("ReplayTime[Seconds]",measures()["Replay time request s"])
+        self.assertIn("FactTelemetry[TimeMs] <= timeLimit",measures()["Selected bin"])
+
+    def test_independent_replay_checkpoints(self):
+        states=expected()["replay"]
+        for driver in ("NOR","LEC"):
+            points=[p for p in states if p["driver"]==driver]
+            self.assertEqual(points[0]["bin"],0)
+            self.assertEqual(points[-1]["bin"],500)
+            for p in points:
+                self.assertLessEqual(p["elapsed_s"],p["requested_s"])
+        self.assertEqual(states[1]["bin"],183)
+
+    def test_no_visuals_overlap(self):
+        for p in (self.output/"F1 Telemetry Lab.Report/definition/pages").glob("*/page.json"):
+            visuals=[json.loads(f.read_text()) for f in (p.parent/"visuals").glob("*/visual.json")]
+            for i,a in enumerate(visuals):
+                for b in visuals[i+1:]:
+                    x,y=a["position"],b["position"]
+                    overlap=(x["x"]<y["x"]+y["width"] and y["x"]<x["x"]+x["width"]
+                             and x["y"]<y["y"]+y["height"] and y["y"]<x["y"]+x["height"])
+                    self.assertFalse(overlap,(p.parent.name,a["name"],b["name"]))
+
+    def test_charts_do_not_filter_controls(self):
+        for path in (self.output/"F1 Telemetry Lab.Report/definition/pages").glob("*/page.json"):
+            page=json.loads(path.read_text())
+            self.assertTrue(page["visualInteractions"])
+            self.assertTrue(all(i["type"]=="NoFilter" for i in page["visualInteractions"]))
 
 
 if __name__=="__main__": unittest.main()

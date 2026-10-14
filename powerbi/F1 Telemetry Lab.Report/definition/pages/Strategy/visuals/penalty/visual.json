@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.1.0/schema.json",
   "name": "penalty",
   "position": {
-    "x": 1064,
-    "y": 315,
-    "width": 512,
-    "height": 115,
+    "x": 1060,
+    "y": 310,
+    "width": 516,
+    "height": 94,
     "z": 1,
-    "tabOrder": 11
+    "tabOrder": 12
   },
   "visual": {
     "visualType": "card",
@@ -26,21 +26,21 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'PENALTY VS BEST · seconds'"
+                  "Value": "'ÉCART AU MEILLEUR · s'"
                 }
               }
             },
             "fontColor": {
               "expr": {
                 "Literal": {
-                  "Value": "'#eef4ff'"
+                  "Value": "'#a5b4cc'"
                 }
               }
             },
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "12D"
+                  "Value": "14D"
                 }
               }
             },
@@ -125,7 +125,7 @@
             "altText": {
               "expr": {
                 "Literal": {
-                  "Value": "'PENALTY VS BEST · seconds'"
+                  "Value": "'ÉCART AU MEILLEUR · s'"
                 }
               }
             }
@@ -169,7 +169,14 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "30D"
+                  "Value": "38D"
+                }
+              }
+            },
+            "displayUnits": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
                 }
               }
             }

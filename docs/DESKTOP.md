@@ -1,59 +1,76 @@
-# Recette Power BI Desktop
+# Recette Power BI Desktop — version 0.2
 
-## Ouvrir
+## Ouvrir la bonne version
 
-Extraire le dépôt complet. Utiliser Power BI Desktop Windows récent, avec prise en charge des projets PBIP et des définitions PBIR/TMDL. Activer ces fonctions si nécessaire dans Fichier → Options et paramètres → Options → Fonctionnalités en préversion, puis redémarrer.
+Fermer le projet précédent. Télécharger la branche feat/telemetry-lab-mvp, puis extraire le dossier dans un **nouveau dossier**. Cela évite de réutiliser le cache ou les modifications de la version 0.1.
 
-Ouvrir powerbi/F1 Telemetry Lab.pbip, puis Actualiser. Le chargement utilise les CSV embarqués dans le modèle, sans chemin externe.
+Ouvrir powerbi/F1 Telemetry Lab.pbip dans Power BI Desktop Windows récent. Si demandé, activer le format de métadonnées amélioré PBIR dans les options de préversion, puis redémarrer Desktop.
 
-## Résultats attendus
+Cliquer **Actualiser** et attendre la fin du chargement. Les CSV sont embarqués, sans chemin externe. Le bandeau doit indiquer deux tours et 1 002 points.
 
-| Vérification | Résultat |
+Les pages attendues sont **01 · Pit Wall**, **02 · Duel de pilotes**, **03 · Stratégie**. Si les anciens intitulés apparaissent, la version ouverte n'est pas la 0.2.
+
+## Vérifier le replay
+
+NOR et 30 s sont sélectionnés initialement. Le curseur est de type « Avant » : son maximum sélectionné représente le temps demandé. Si le style varie selon la version Desktop, conserver ce mode.
+
+| Pilote / chrono | Temps de l'échantillon | Vitesse | Rapport | Progression |
+|---|---:|---:|---:|---:|
+| NOR / 0 s | 0,000 s | 319,925 km/h | 8 | 0 % |
+| NOR / 30 s | 29,916 s | 117,237 km/h | 3 | 36,6 % |
+| NOR / 60 s | 59,964 s | 273,888 km/h | 7 | 72,8 % |
+| NOR / 80 s | 79,327 s | 318,170 km/h | 8 | 100 % |
+| LEC / 30 s | 29,963 s | 112,494 km/h | 4 | 36,8 % |
+| LEC / 80 s | 79,461 s | 321,000 km/h | 8 | 100 % |
+
+Tolérance : arrondi d'affichage, maximum 0,001 s / 0,01 km/h sur les valeurs non arrondies. La jauge peut afficher la vitesse entière.
+
+Le point agrandi, la jauge, le rapport, la progression, les pédales et le marqueur du profil de vitesse doivent suivre le même instant. Les courbes et la piste doivent rester complètes. Un clic sur une courbe ne doit pas changer les autres vues.
+
+## Vérifier le duel
+
+| Sélection | Résultat |
 |---|---|
-| Modèle | 16 tables, deux relations actives à sens unique |
-| Volume | 1 002 points télémétriques, deux tours, 501 bins communs |
-| NOR | 79,327 s ; secteurs 26,492 / 26,579 / 26,256 |
-| LEC | 79,461 s ; secteurs 26,373 / 26,732 / 26,356 |
-| Comparison A=NOR, B=LEC | Delta final +0,134 s ; secteurs −0,119 / +0,153 / +0,100 s |
-| Comparison A=LEC, B=NOR | Signe de tous les deltas inversé |
-| Comparison A=B | Courbes identiques et deltas nuls |
-| Replay bin=0 | Temps écoulé 0 s ; marqueur au début du tour |
-| Replay bin=500 | Temps écoulé égal au temps officiel du tour |
-| MEDIUM/HARD, arrêt=24, perte=22, rythme=84, dégradation=1 | 4 514,410 s ; 75,24017 min ; meilleur arrêt=24 ; pénalité=0 |
-| Perte au stand 22 → 32 | Total +10 s ; meilleur arrêt inchangé |
-| Même composé deux fois | Message INVALID et sorties de stratégie vides |
+| A=NOR / B=LEC | 79,327 s / 79,461 s ; delta final +0,134 s |
+| A=NOR / B=LEC, secteurs | −0,119 / +0,153 / +0,100 s |
+| A=LEC / B=NOR | Tous les deltas changent de signe |
+| A=B | Courbes superposées, deltas nuls |
 
-Les segments n'ont pas de sélection initiale enregistrée : les mesures disposent de valeurs de repli. Pour une présentation, sélectionner explicitement les paramètres. Le curseur du replay est une liste de points de progression, pas un bouton Play.
+Le message « Lecture du duel » doit suivre les sélections. Le delta est toujours B − A.
 
-## Vérifications visuelles et interactions
+## Vérifier la stratégie
 
-1. Les trois pages doivent afficher un fond sombre, des graphiques menthe/corail et des valeurs lisibles.
-2. Changer NOR/LEC sur Replay : vitesse, pédales, temps, position et courbes doivent suivre le même tour.
-3. Sélectionner plusieurs bins, dont 0, 75, 160, 320 et 500 : le point doit se déplacer et les KPI changer.
-4. La piste doit apparaître comme une image SVG, pas du texte.
-5. Changer les sélections A/B : les courbes et secteurs doivent suivre la sélection.
-6. Modifier arrêt, composés et dégradation : les deux graphiques stratégiques doivent se recalculer.
-7. Vérifier que le graphique des temps par tour présente un seul pic de perte au stand.
+Hypothèses de départ : MEDIUM → HARD, arrêt après le tour 24, perte au stand 22 s, rythme de base 84 s, multiplicateur de dégradation 1.
 
-## Si un problème apparaît
+| Changement | Total attendu | Meilleur arrêt | Écart au meilleur |
+|---|---:|---:|---:|
+| Valeurs de départ | 4 514,410 s / 75 min 14,4 s | 24 | 0 s |
+| Arrêt au tour 35 | 4 519,415 s | 24 | 5,005 s |
+| Perte au stand 32 s | 4 524,410 s | 24 | 0 s |
+| Dégradation ×2 | 4 541,770 s | 21 | 0,510 s |
+| Deux composés identiques | Scénario invalide, sorties vides | Vide | Vide |
 
-| Symptôme | Contrôle |
-|---|---|
-| Erreur avant ouverture | Copier le message complet, la version Desktop et le chemin cité |
-| Erreur sur une mesure | Copier le nom de la mesure et le texte du message |
-| Piste affichée en texte | Vérifier que Metrics[Track SVG] est catégorisée Image URL dans Outils de mesure |
-| Piste trop petite ou coupée | Ajuster la hauteur d'image et la largeur de colonne du visuel de table, puis sauvegarder |
-| Segment sans valeur affichée | Sélectionner une valeur explicitement ; « Tout » utilise le repli documenté |
-| Mise en forme différente | Indiquer la page et le visuel ; les noms de propriétés visuelles peuvent évoluer selon Desktop |
+Le plan des relais doit changer avec le tour d'arrêt et les pneus. La perte au stand doit apparaître une seule fois, sur le tour d'entrée aux stands. Le graphique des candidats affiche une pénalité relative à l'optimum, pas un temps total.
 
-Pour les éventuelles corrections, envoyer le message d'erreur ou une capture accompagnée de la version de Desktop.
+Le fichier [expected.json](validation/expected.json) donne les contrôles numériques complets, calculés indépendamment depuis les CSV et les formules Python.
 
-## Performance
+## Validation visuelle
 
-Ouvrir Affichage → Analyseur de performances, puis Démarrer l'enregistrement. Mesurer le changement de curseur, le changement A/B et le calcul du meilleur arrêt. Exporter les résultats JSON et noter ordinateur/version. Un objectif initial raisonnable est une interaction ressentie fluide ; aucune latence n'est certifiée avant cette mesure.
+- Piste complète, point agrandi repérable, légende lisible.
+- Jauge, cards et segments sans texte tronqué.
+- SVG des pédales et du plan des relais rendus comme images.
+- Couleurs des deux pilotes distinctes et stables.
+- Cases initiales NOR/LEC et MEDIUM/HARD visibles.
+- Aucune page vide après actualisation.
 
-## Sauvegarder et exporter
+Le nuage de points peut avoir une proportion légèrement différente selon la zone réservée aux axes et à la légende. Les aperçus SVG du dépôt sont des aperçus de conception : ils ne prouvent pas le rendu Desktop.
 
-Après recette : enregistrer le projet PBIP pour conserver les réglages Desktop. Pour le fichier PBIX : Fichier → Enregistrer sous, choisir le format PBIX proposé par la version installée. Le PBIX est généré par Desktop et exclu du suivi Git pour éviter de versionner un binaire volumineux.
+## En cas d'erreur
 
-Avant de relancer le générateur, sauvegarder les modifications manuelles dans Git : il reconstruit les définitions.
+Envoyer le message complet et la version de Power BI Desktop. Pour un problème de mise en forme, envoyer une capture de la page entière, puis du visuel concerné. Les définitions seront corrigées dans le générateur, afin de conserver un projet reproductible.
+
+## Performance et sauvegarde
+
+Dans Affichage → Analyseur de performances, enregistrer un changement de chrono, un changement de pilote et un changement de stratégie. Exporter les résultats ; aucune latence n'est certifiée avant cette mesure.
+
+Après recette, enregistrer le PBIP. Pour le PBIX, utiliser Enregistrer sous dans Desktop. Avant de reconstruire le projet avec Python, sauvegarder les réglages manuels dans Git : le générateur remplace les définitions.

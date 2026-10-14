@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.1.0/schema.json",
   "name": "timeB",
   "position": {
-    "x": 1034,
-    "y": 110,
-    "width": 250,
-    "height": 115,
+    "x": 950,
+    "y": 136,
+    "width": 300,
+    "height": 80,
     "z": 1,
-    "tabOrder": 5
+    "tabOrder": 6
   },
   "visual": {
     "visualType": "card",
@@ -26,21 +26,21 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'LAP B · seconds'"
+                  "Value": "'TOUR B · s'"
                 }
               }
             },
             "fontColor": {
               "expr": {
                 "Literal": {
-                  "Value": "'#eef4ff'"
+                  "Value": "'#a5b4cc'"
                 }
               }
             },
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "12D"
+                  "Value": "14D"
                 }
               }
             },
@@ -125,7 +125,7 @@
             "altText": {
               "expr": {
                 "Literal": {
-                  "Value": "'LAP B · seconds'"
+                  "Value": "'TOUR B · s'"
                 }
               }
             }
@@ -169,7 +169,14 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "30D"
+                  "Value": "28D"
+                }
+              }
+            },
+            "displayUnits": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
                 }
               }
             }

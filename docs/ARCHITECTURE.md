@@ -1,4 +1,4 @@
-# Architecture et périmètre v0.1
+# Architecture et périmètre v0.2
 
 ## Flux de données
 
@@ -13,7 +13,7 @@ Python prépare les observations. Power Query charge et type les données. DAX c
 | DimLap | Un tour ; pilote, séance, circuit, temps officiel et secteurs |
 | FactTelemetry | Un tour × un bin de progression |
 | DimDistance | Un bin ; progression 0–100 % ; dimension commune aux courbes |
-| ReplayBin | Curseur déconnecté ; un point 0–500 |
+| ReplayTime | Curseur déconnecté ; temps 0–80 secondes, pas de 0,1 s |
 | LapA / LapB | Sélections indépendantes pour la comparaison |
 | Compound | Hypothèses de rythme et de dégradation par composé |
 | FirstCompound / SecondCompound | Composés sélectionnés, déconnectés |
@@ -28,11 +28,11 @@ La dimension pilote/circuit/séance est volontairement intégrée à DimLap pour
 
 ## Replay
 
-Le curseur sélectionne un **point de progression**, pas un temps absolu. Chaque point a son propre temps écoulé, donc sa vitesse, son rapport et sa position. La piste et les KPI consultent le même bin et le même tour. Les courbes restent visibles sur tout le tour.
+Le curseur sélectionne un temps écoulé. DAX utilise MAX sur les valeurs visibles du segment Before, puis choisit le dernier bin dont TimeMs est inférieur ou égal au temps demandé. L’échantillonnage préparé comporte 501 points ; le temps affiché peut être légèrement inférieur au temps demandé. Au-delà du temps du tour, le curseur reste au dernier point.
 
-Le SVG assemble la géométrie X/Y avec CONCATENATEX, puis place un marqueur sur le point choisi. La position est normalisée dans un viewBox commun en conservant les proportions. Les coordonnées sont issues de FastF1 pour les données historiques et d'un tracé stylisé pour la démonstration synthétique.
+Le nuage de points natif trace la géométrie X/Y, différencie les zones selon frein/vitesse et agrandit le point sélectionné. L’absence de filtre temporel sur le fait maintient toute la piste et toutes les courbes visibles. Les barres de pédales utilisent une mesure SVG indépendante, catégorisée ImageUrl. Le plan stratégique utilise aussi un SVG.
 
-Les clics sur une courbe peuvent ajouter un filtre de progression. Les mesures du replay retirent ce filtre pour préserver la cohérence avec le curseur. Pour une vidéo reproductible, sélectionner les points uniquement avec le segment.
+Les sélections sont enregistrées dans les objets des segments. Les graphiques n’appliquent pas de filtres aux autres visuels : seul le changement de paramètres pilote les interactions. Pas de lecture automatique dans cette version.
 
 ## Comparaison
 

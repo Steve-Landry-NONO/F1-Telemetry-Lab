@@ -1,16 +1,16 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.1.0/schema.json",
-  "name": "session",
+  "name": "pedalbars",
   "position": {
-    "x": 1040,
-    "y": 18,
-    "width": 536,
-    "height": 70,
+    "x": 24,
+    "y": 718,
+    "width": 610,
+    "height": 158,
     "z": 1,
-    "tabOrder": 1
+    "tabOrder": 9
   },
   "visual": {
-    "visualType": "card",
+    "visualType": "tableEx",
     "drillFilterOtherVisuals": true,
     "visualContainerObjects": {
       "title": [
@@ -26,21 +26,21 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'SESSION / PROVENANCE'"
+                  "Value": "'COMMANDES / instant sélectionné'"
                 }
               }
             },
             "fontColor": {
               "expr": {
                 "Literal": {
-                  "Value": "'#eef4ff'"
+                  "Value": "'#a5b4cc'"
                 }
               }
             },
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "12D"
+                  "Value": "14D"
                 }
               }
             },
@@ -125,7 +125,7 @@
             "altText": {
               "expr": {
                 "Literal": {
-                  "Value": "'SESSION / PROVENANCE'"
+                  "Value": "'COMMANDES / instant sélectionné'"
                 }
               }
             }
@@ -145,38 +145,52 @@
                       "Entity": "Metrics"
                     }
                   },
-                  "Property": "Session label"
+                  "Property": "Pedals SVG"
                 }
               },
-              "queryRef": "Metrics.Session label",
-              "nativeQueryRef": "Session label"
+              "queryRef": "Metrics.Pedals SVG",
+              "nativeQueryRef": "Pedals SVG"
             }
           ]
         }
       }
     },
     "objects": {
-      "labels": [
+      "grid": [
         {
           "properties": {
-            "color": {
+            "imageHeight": {
               "expr": {
                 "Literal": {
-                  "Value": "'#74f7ce'"
+                  "Value": "118D"
                 }
               }
             },
-            "fontSize": {
+            "imageWidth": {
               "expr": {
                 "Literal": {
-                  "Value": "30D"
+                  "Value": "578D"
+                }
+              }
+            },
+            "rowPadding": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
+            "outlineColor": {
+              "expr": {
+                "Literal": {
+                  "Value": "'#101826'"
                 }
               }
             }
           }
         }
       ],
-      "categoryLabels": [
+      "columnHeaders": [
         {
           "properties": {
             "show": {
@@ -186,6 +200,55 @@
                 }
               }
             }
+          }
+        }
+      ],
+      "total": [
+        {
+          "properties": {
+            "totals": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "values": [
+        {
+          "properties": {
+            "fontColor": {
+              "expr": {
+                "Literal": {
+                  "Value": "'#eef4ff'"
+                }
+              }
+            },
+            "backColor": {
+              "expr": {
+                "Literal": {
+                  "Value": "'#101826'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "582D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Metrics.Pedals SVG"
           }
         }
       ]

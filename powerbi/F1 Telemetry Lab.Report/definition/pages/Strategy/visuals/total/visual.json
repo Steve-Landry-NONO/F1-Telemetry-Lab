@@ -3,11 +3,11 @@
   "name": "total",
   "position": {
     "x": 24,
-    "y": 315,
+    "y": 310,
     "width": 500,
-    "height": 115,
+    "height": 94,
     "z": 1,
-    "tabOrder": 9
+    "tabOrder": 10
   },
   "visual": {
     "visualType": "card",
@@ -26,21 +26,21 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'RACE TOTAL · minutes'"
+                  "Value": "'TEMPS SIMULÉ'"
                 }
               }
             },
             "fontColor": {
               "expr": {
                 "Literal": {
-                  "Value": "'#eef4ff'"
+                  "Value": "'#a5b4cc'"
                 }
               }
             },
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "12D"
+                  "Value": "14D"
                 }
               }
             },
@@ -125,7 +125,7 @@
             "altText": {
               "expr": {
                 "Literal": {
-                  "Value": "'RACE TOTAL · minutes'"
+                  "Value": "'TEMPS SIMULÉ'"
                 }
               }
             }
@@ -145,11 +145,11 @@
                       "Entity": "Metrics"
                     }
                   },
-                  "Property": "Strategy total min"
+                  "Property": "Strategy time label"
                 }
               },
-              "queryRef": "Metrics.Strategy total min",
-              "nativeQueryRef": "Strategy total min"
+              "queryRef": "Metrics.Strategy time label",
+              "nativeQueryRef": "Strategy time label"
             }
           ]
         }
@@ -162,7 +162,7 @@
             "color": {
               "expr": {
                 "Literal": {
-                  "Value": "'#74f7ce'"
+                  "Value": "'#eef4ff'"
                 }
               }
             },
@@ -170,6 +170,13 @@
               "expr": {
                 "Literal": {
                   "Value": "30D"
+                }
+              }
+            },
+            "displayUnits": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
                 }
               }
             }

@@ -3,11 +3,11 @@
   "name": "deltatrace",
   "position": {
     "x": 24,
-    "y": 565,
-    "width": 1060,
-    "height": 300,
+    "y": 584,
+    "width": 990,
+    "height": 228,
     "z": 1,
-    "tabOrder": 8
+    "tabOrder": 10
   },
   "visual": {
     "visualType": "lineChart",
@@ -26,21 +26,21 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'DELTA B − A · positive = B slower'"
+                  "Value": "'DELTA CUMULÉ · où se construit l''écart ?'"
                 }
               }
             },
             "fontColor": {
               "expr": {
                 "Literal": {
-                  "Value": "'#eef4ff'"
+                  "Value": "'#a5b4cc'"
                 }
               }
             },
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "12D"
+                  "Value": "14D"
                 }
               }
             },
@@ -125,7 +125,7 @@
             "altText": {
               "expr": {
                 "Literal": {
-                  "Value": "'DELTA B − A · positive = B slower'"
+                  "Value": "'DELTA CUMULÉ · où se construit l''écart ?'"
                 }
               }
             }
@@ -248,6 +248,13 @@
                   "Value": "'#eef4ff'"
                 }
               }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "11D"
+                }
+              }
             }
           }
         }
@@ -261,7 +268,34 @@
                   "Value": "3D"
                 }
               }
+            },
+            "showMarker": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
             }
+          }
+        }
+      ],
+      "dataPoint": [
+        {
+          "properties": {
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#74f7ce'"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Metrics.Delta B minus A s"
           }
         }
       ]

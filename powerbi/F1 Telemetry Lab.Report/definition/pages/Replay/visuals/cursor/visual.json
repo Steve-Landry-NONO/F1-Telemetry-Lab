@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.1.0/schema.json",
   "name": "cursor",
   "position": {
-    "x": 344,
-    "y": 110,
-    "width": 390,
-    "height": 85,
+    "x": 292,
+    "y": 136,
+    "width": 610,
+    "height": 80,
     "z": 1,
-    "tabOrder": 3
+    "tabOrder": 4
   },
   "visual": {
     "visualType": "slicer",
@@ -26,21 +26,21 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'REPLAY CURSOR · bin 0–500'"
+                  "Value": "'CHRONO · secondes'"
                 }
               }
             },
             "fontColor": {
               "expr": {
                 "Literal": {
-                  "Value": "'#eef4ff'"
+                  "Value": "'#a5b4cc'"
                 }
               }
             },
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "12D"
+                  "Value": "14D"
                 }
               }
             },
@@ -125,7 +125,7 @@
             "altText": {
               "expr": {
                 "Literal": {
-                  "Value": "'REPLAY CURSOR · bin 0–500'"
+                  "Value": "'CHRONO · secondes'"
                 }
               }
             }
@@ -142,14 +142,14 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "ReplayBin"
+                      "Entity": "ReplayTime"
                     }
                   },
-                  "Property": "Bin"
+                  "Property": "Seconds"
                 }
               },
-              "queryRef": "ReplayBin.Bin",
-              "nativeQueryRef": "Bin"
+              "queryRef": "ReplayTime.Seconds",
+              "nativeQueryRef": "Seconds"
             }
           ]
         }
@@ -162,7 +162,7 @@
             "mode": {
               "expr": {
                 "Literal": {
-                  "Value": "'Dropdown'"
+                  "Value": "'Before'"
                 }
               }
             }
@@ -175,7 +175,7 @@
             "singleSelect": {
               "expr": {
                 "Literal": {
-                  "Value": "true"
+                  "Value": "false"
                 }
               }
             },
@@ -205,6 +205,13 @@
                   "Value": "'#101826'"
                 }
               }
+            },
+            "textSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "15D"
+                }
+              }
             }
           }
         }
@@ -217,6 +224,48 @@
                 "Literal": {
                   "Value": "false"
                 }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "filter": {
+              "filter": {
+                "Version": 2,
+                "From": [
+                  {
+                    "Name": "s",
+                    "Entity": "ReplayTime",
+                    "Type": 0
+                  }
+                ],
+                "Where": [
+                  {
+                    "Condition": {
+                      "Comparison": {
+                        "ComparisonKind": 4,
+                        "Left": {
+                          "Column": {
+                            "Expression": {
+                              "SourceRef": {
+                                "Source": "s"
+                              }
+                            },
+                            "Property": "Seconds"
+                          }
+                        },
+                        "Right": {
+                          "Literal": {
+                            "Value": "30L"
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
               }
             }
           }

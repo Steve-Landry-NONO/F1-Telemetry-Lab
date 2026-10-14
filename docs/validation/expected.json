@@ -1,0 +1,149 @@
+{
+  "notice": "Independent Python expectations; DAX and Desktop rendering still require local verification.",
+  "replay": [
+    {
+      "driver": "NOR",
+      "requested_s": 0,
+      "bin": 0,
+      "elapsed_s": 0.0,
+      "speed_kmh": 319.925,
+      "gear": 8,
+      "throttle_pct": 99.0,
+      "brake": 0,
+      "progress_pct": 0.0
+    },
+    {
+      "driver": "NOR",
+      "requested_s": 30,
+      "bin": 183,
+      "elapsed_s": 29.916014999999998,
+      "speed_kmh": 117.237,
+      "gear": 3,
+      "throttle_pct": 0.763,
+      "brake": 0,
+      "progress_pct": 36.6
+    },
+    {
+      "driver": "NOR",
+      "requested_s": 60,
+      "bin": 364,
+      "elapsed_s": 59.963609,
+      "speed_kmh": 273.888,
+      "gear": 7,
+      "throttle_pct": 99.0,
+      "brake": 0,
+      "progress_pct": 72.8
+    },
+    {
+      "driver": "NOR",
+      "requested_s": 80,
+      "bin": 500,
+      "elapsed_s": 79.327,
+      "speed_kmh": 318.17,
+      "gear": 8,
+      "throttle_pct": 100.0,
+      "brake": 0,
+      "progress_pct": 100.0
+    },
+    {
+      "driver": "LEC",
+      "requested_s": 0,
+      "bin": 0,
+      "elapsed_s": 0.0,
+      "speed_kmh": 322.0,
+      "gear": 8,
+      "throttle_pct": 99.618,
+      "brake": 0,
+      "progress_pct": 0.0
+    },
+    {
+      "driver": "LEC",
+      "requested_s": 30,
+      "bin": 184,
+      "elapsed_s": 29.963186,
+      "speed_kmh": 112.494,
+      "gear": 4,
+      "throttle_pct": 36.275,
+      "brake": 0,
+      "progress_pct": 36.8
+    },
+    {
+      "driver": "LEC",
+      "requested_s": 60,
+      "bin": 363,
+      "elapsed_s": 59.967116000000004,
+      "speed_kmh": 268.397,
+      "gear": 7,
+      "throttle_pct": 99.0,
+      "brake": 0,
+      "progress_pct": 72.6
+    },
+    {
+      "driver": "LEC",
+      "requested_s": 80,
+      "bin": 500,
+      "elapsed_s": 79.461,
+      "speed_kmh": 321.0,
+      "gear": 8,
+      "throttle_pct": 100.0,
+      "brake": 0,
+      "progress_pct": 100.0
+    }
+  ],
+  "comparison": {
+    "A": "NOR",
+    "B": "LEC",
+    "delta_s": 0.134,
+    "sector_deltas_s": [
+      -0.119,
+      0.153,
+      0.1
+    ]
+  },
+  "strategy": [
+    {
+      "first": "MEDIUM",
+      "second": "HARD",
+      "stop_lap": 24,
+      "pit_loss_s": 22,
+      "degradation_multiplier": 1,
+      "base_s": 84,
+      "total_s": 4514.41,
+      "best_stop": 24,
+      "penalty_s": 0.0
+    },
+    {
+      "first": "MEDIUM",
+      "second": "HARD",
+      "stop_lap": 35,
+      "pit_loss_s": 22,
+      "degradation_multiplier": 1,
+      "base_s": 84,
+      "total_s": 4519.415,
+      "best_stop": 24,
+      "penalty_s": 5.005000000000109
+    },
+    {
+      "first": "MEDIUM",
+      "second": "HARD",
+      "stop_lap": 24,
+      "pit_loss_s": 32,
+      "degradation_multiplier": 1,
+      "base_s": 84,
+      "total_s": 4524.41,
+      "best_stop": 24,
+      "penalty_s": 0.0
+    },
+    {
+      "first": "MEDIUM",
+      "second": "HARD",
+      "stop_lap": 24,
+      "pit_loss_s": 22,
+      "degradation_multiplier": 2,
+      "base_s": 84,
+      "total_s": 4541.77,
+      "best_stop": 21,
+      "penalty_s": 0.5100000000002183
+    }
+  ]
+}

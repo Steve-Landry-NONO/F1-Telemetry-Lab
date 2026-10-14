@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.1.0/schema.json",
   "name": "brake",
   "position": {
-    "x": 394,
-    "y": 745,
-    "width": 340,
-    "height": 115,
+    "x": 1352,
+    "y": 378,
+    "width": 224,
+    "height": 134,
     "z": 1,
-    "tabOrder": 11
+    "tabOrder": 14
   },
   "visual": {
     "visualType": "card",
@@ -26,21 +26,21 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'BRAKE · 0 / 1'"
+                  "Value": "'FREIN · 0 / 1'"
                 }
               }
             },
             "fontColor": {
               "expr": {
                 "Literal": {
-                  "Value": "'#eef4ff'"
+                  "Value": "'#a5b4cc'"
                 }
               }
             },
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "12D"
+                  "Value": "14D"
                 }
               }
             },
@@ -125,7 +125,7 @@
             "altText": {
               "expr": {
                 "Literal": {
-                  "Value": "'BRAKE · 0 / 1'"
+                  "Value": "'FREIN · 0 / 1'"
                 }
               }
             }
@@ -169,7 +169,14 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "30D"
+                  "Value": "34D"
+                }
+              }
+            },
+            "displayUnits": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
                 }
               }
             }

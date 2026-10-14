@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.1.0/schema.json",
   "name": "candidates",
   "position": {
-    "x": 804,
-    "y": 455,
-    "width": 772,
-    "height": 410,
+    "x": 802,
+    "y": 580,
+    "width": 774,
+    "height": 214,
     "z": 1,
-    "tabOrder": 13
+    "tabOrder": 15
   },
   "visual": {
     "visualType": "lineChart",
@@ -26,21 +26,21 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'STRATEGY SWEEP · race seconds by stop lap'"
+                  "Value": "'COÛT DES ARRÊTS · écart au meilleur candidat (s)'"
                 }
               }
             },
             "fontColor": {
               "expr": {
                 "Literal": {
-                  "Value": "'#eef4ff'"
+                  "Value": "'#a5b4cc'"
                 }
               }
             },
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "12D"
+                  "Value": "14D"
                 }
               }
             },
@@ -125,7 +125,7 @@
             "altText": {
               "expr": {
                 "Literal": {
-                  "Value": "'STRATEGY SWEEP · race seconds by stop lap'"
+                  "Value": "'COÛT DES ARRÊTS · écart au meilleur candidat (s)'"
                 }
               }
             }
@@ -163,11 +163,25 @@
                       "Entity": "Metrics"
                     }
                   },
-                  "Property": "Candidate total s"
+                  "Property": "Candidate penalty s"
                 }
               },
-              "queryRef": "Metrics.Candidate total s",
-              "nativeQueryRef": "Candidate total s"
+              "queryRef": "Metrics.Candidate penalty s",
+              "nativeQueryRef": "Candidate penalty s"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Metrics"
+                    }
+                  },
+                  "Property": "Chosen stop penalty s"
+                }
+              },
+              "queryRef": "Metrics.Chosen stop penalty s",
+              "nativeQueryRef": "Chosen stop penalty s"
             }
           ]
         }
@@ -248,6 +262,13 @@
                   "Value": "'#eef4ff'"
                 }
               }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "11D"
+                }
+              }
             }
           }
         }
@@ -261,7 +282,73 @@
                   "Value": "3D"
                 }
               }
+            },
+            "showMarker": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
             }
+          }
+        },
+        {
+          "properties": {
+            "showMarker": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "markerSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "8D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Metrics.Chosen stop penalty s"
+          }
+        }
+      ],
+      "dataPoint": [
+        {
+          "properties": {
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#74f7ce'"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Metrics.Candidate penalty s"
+          }
+        },
+        {
+          "properties": {
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#ff544f'"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Metrics.Chosen stop penalty s"
           }
         }
       ]

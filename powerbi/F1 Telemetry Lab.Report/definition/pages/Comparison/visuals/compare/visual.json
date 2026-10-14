@@ -3,11 +3,11 @@
   "name": "compare",
   "position": {
     "x": 24,
-    "y": 245,
+    "y": 330,
     "width": 1552,
-    "height": 300,
+    "height": 236,
     "z": 1,
-    "tabOrder": 7
+    "tabOrder": 9
   },
   "visual": {
     "visualType": "lineChart",
@@ -26,21 +26,21 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'SPEED OVERLAY · aligned at equal circuit progress'"
+                  "Value": "'VITESSE · comparer au même endroit du circuit'"
                 }
               }
             },
             "fontColor": {
               "expr": {
                 "Literal": {
-                  "Value": "'#eef4ff'"
+                  "Value": "'#a5b4cc'"
                 }
               }
             },
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "12D"
+                  "Value": "14D"
                 }
               }
             },
@@ -125,7 +125,7 @@
             "altText": {
               "expr": {
                 "Literal": {
-                  "Value": "'SPEED OVERLAY · aligned at equal circuit progress'"
+                  "Value": "'VITESSE · comparer au même endroit du circuit'"
                 }
               }
             }
@@ -262,6 +262,13 @@
                   "Value": "'#eef4ff'"
                 }
               }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "11D"
+                }
+              }
             }
           }
         }
@@ -275,7 +282,52 @@
                   "Value": "3D"
                 }
               }
+            },
+            "showMarker": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
             }
+          }
+        }
+      ],
+      "dataPoint": [
+        {
+          "properties": {
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#74f7ce'"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Metrics.Speed A"
+          }
+        },
+        {
+          "properties": {
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#ff544f'"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Metrics.Speed B"
           }
         }
       ]

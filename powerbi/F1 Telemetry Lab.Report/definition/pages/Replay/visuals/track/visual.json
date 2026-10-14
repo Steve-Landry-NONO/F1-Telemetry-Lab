@@ -3,14 +3,14 @@
   "name": "track",
   "position": {
     "x": 24,
-    "y": 245,
-    "width": 710,
-    "height": 480,
+    "y": 232,
+    "width": 610,
+    "height": 390,
     "z": 1,
     "tabOrder": 7
   },
   "visual": {
-    "visualType": "tableEx",
+    "visualType": "scatterChart",
     "drillFilterOtherVisuals": true,
     "visualContainerObjects": {
       "title": [
@@ -26,21 +26,21 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'CIRCUIT POSITION · SVG / DAX'"
+                  "Value": "'MONZA · télémétrie sur la piste'"
                 }
               }
             },
             "fontColor": {
               "expr": {
                 "Literal": {
-                  "Value": "'#eef4ff'"
+                  "Value": "'#a5b4cc'"
                 }
               }
             },
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "12D"
+                  "Value": "14D"
                 }
               }
             },
@@ -125,7 +125,7 @@
             "altText": {
               "expr": {
                 "Literal": {
-                  "Value": "'CIRCUIT POSITION · SVG / DAX'"
+                  "Value": "'MONZA · télémétrie sur la piste'"
                 }
               }
             }
@@ -135,7 +135,25 @@
     },
     "query": {
       "queryState": {
-        "Values": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DimDistance"
+                    }
+                  },
+                  "Property": "Bin"
+                }
+              },
+              "queryRef": "DimDistance.Bin",
+              "nativeQueryRef": "Bin"
+            }
+          ]
+        },
+        "X": {
           "projections": [
             {
               "field": {
@@ -145,38 +163,104 @@
                       "Entity": "Metrics"
                     }
                   },
-                  "Property": "Track SVG"
+                  "Property": "Track X"
                 }
               },
-              "queryRef": "Metrics.Track SVG",
-              "nativeQueryRef": "Track SVG"
+              "queryRef": "Metrics.Track X",
+              "nativeQueryRef": "Track X"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Metrics"
+                    }
+                  },
+                  "Property": "Track Y"
+                }
+              },
+              "queryRef": "Metrics.Track Y",
+              "nativeQueryRef": "Track Y"
+            }
+          ]
+        },
+        "Size": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Metrics"
+                    }
+                  },
+                  "Property": "Track marker size"
+                }
+              },
+              "queryRef": "Metrics.Track marker size",
+              "nativeQueryRef": "Track marker size"
+            }
+          ]
+        },
+        "Series": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactTelemetry"
+                    }
+                  },
+                  "Property": "SpeedBand"
+                }
+              },
+              "queryRef": "FactTelemetry.SpeedBand",
+              "nativeQueryRef": "SpeedBand"
+            }
+          ]
+        },
+        "Tooltips": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Metrics"
+                    }
+                  },
+                  "Property": "Speed trace"
+                }
+              },
+              "queryRef": "Metrics.Speed trace",
+              "nativeQueryRef": "Speed trace"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Metrics"
+                    }
+                  },
+                  "Property": "Elapsed trace s"
+                }
+              },
+              "queryRef": "Metrics.Elapsed trace s",
+              "nativeQueryRef": "Elapsed trace s"
             }
           ]
         }
       }
     },
     "objects": {
-      "grid": [
-        {
-          "properties": {
-            "imageHeight": {
-              "expr": {
-                "Literal": {
-                  "Value": "420D"
-                }
-              }
-            },
-            "outlineColor": {
-              "expr": {
-                "Literal": {
-                  "Value": "'#101826'"
-                }
-              }
-            }
-          }
-        }
-      ],
-      "columnHeaders": [
+      "categoryAxis": [
         {
           "properties": {
             "show": {
@@ -185,17 +269,105 @@
                   "Value": "false"
                 }
               }
+            },
+            "start": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
+            "end": {
+              "expr": {
+                "Literal": {
+                  "Value": "640D"
+                }
+              }
             }
           }
         }
       ],
-      "total": [
+      "valueAxis": [
         {
           "properties": {
-            "totals": {
+            "show": {
               "expr": {
                 "Literal": {
                   "Value": "false"
+                }
+              }
+            },
+            "start": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
+            "end": {
+              "expr": {
+                "Literal": {
+                  "Value": "460D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "legend": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "position": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Bottom'"
+                }
+              }
+            },
+            "labelColor": {
+              "expr": {
+                "Literal": {
+                  "Value": "'#a5b4cc'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "12D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "bubbles": [
+        {
+          "properties": {
+            "bubbleSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "12D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "fillPoint": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
                 }
               }
             }

@@ -1,13 +1,13 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.1.0/schema.json",
-  "name": "session",
+  "name": "hint",
   "position": {
-    "x": 1040,
-    "y": 18,
-    "width": 536,
-    "height": 70,
+    "x": 24,
+    "y": 638,
+    "width": 610,
+    "height": 64,
     "z": 1,
-    "tabOrder": 1
+    "tabOrder": 8
   },
   "visual": {
     "visualType": "card",
@@ -19,28 +19,28 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "true"
+                  "Value": "false"
                 }
               }
             },
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'SESSION / PROVENANCE'"
+                  "Value": "''"
                 }
               }
             },
             "fontColor": {
               "expr": {
                 "Literal": {
-                  "Value": "'#eef4ff'"
+                  "Value": "'#a5b4cc'"
                 }
               }
             },
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "12D"
+                  "Value": "14D"
                 }
               }
             },
@@ -125,7 +125,7 @@
             "altText": {
               "expr": {
                 "Literal": {
-                  "Value": "'SESSION / PROVENANCE'"
+                  "Value": "''"
                 }
               }
             }
@@ -145,11 +145,11 @@
                       "Entity": "Metrics"
                     }
                   },
-                  "Property": "Session label"
+                  "Property": "Replay instruction"
                 }
               },
-              "queryRef": "Metrics.Session label",
-              "nativeQueryRef": "Session label"
+              "queryRef": "Metrics.Replay instruction",
+              "nativeQueryRef": "Replay instruction"
             }
           ]
         }
@@ -162,14 +162,21 @@
             "color": {
               "expr": {
                 "Literal": {
-                  "Value": "'#74f7ce'"
+                  "Value": "'#eef4ff'"
                 }
               }
             },
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "30D"
+                  "Value": "13D"
+                }
+              }
+            },
+            "displayUnits": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
                 }
               }
             }

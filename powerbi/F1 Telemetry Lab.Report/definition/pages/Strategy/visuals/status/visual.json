@@ -3,11 +3,11 @@
   "name": "status",
   "position": {
     "x": 24,
-    "y": 215,
+    "y": 232,
     "width": 1552,
-    "height": 80,
+    "height": 62,
     "z": 1,
-    "tabOrder": 8
+    "tabOrder": 9
   },
   "visual": {
     "visualType": "card",
@@ -26,21 +26,21 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'MODEL ASSUMPTIONS · 53 laps / one stop'"
+                  "Value": "'HYPOTHÈSES'"
                 }
               }
             },
             "fontColor": {
               "expr": {
                 "Literal": {
-                  "Value": "'#eef4ff'"
+                  "Value": "'#a5b4cc'"
                 }
               }
             },
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "12D"
+                  "Value": "14D"
                 }
               }
             },
@@ -125,7 +125,7 @@
             "altText": {
               "expr": {
                 "Literal": {
-                  "Value": "'MODEL ASSUMPTIONS · 53 laps / one stop'"
+                  "Value": "'HYPOTHÈSES'"
                 }
               }
             }
@@ -162,14 +162,21 @@
             "color": {
               "expr": {
                 "Literal": {
-                  "Value": "'#74f7ce'"
+                  "Value": "'#eef4ff'"
                 }
               }
             },
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "30D"
+                  "Value": "16D"
+                }
+              }
+            },
+            "displayUnits": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
                 }
               }
             }

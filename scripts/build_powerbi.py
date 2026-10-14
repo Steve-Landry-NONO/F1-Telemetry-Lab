@@ -13,6 +13,9 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/"src"))
 from f1lab.data import validate
 from f1lab.strategy import COMPOUNDS
+from polish import additional_measures, render_layout
+
+TEXT_MEASURES = {"Data source", "Strategy status", "Selected driver", "Session label", "Data health", "Replay subtitle", "Comparison subtitle", "Strategy subtitle", "Replay instruction", "Replay heading", "Comparison insight", "Comparison instruction", "Strategy insight", "Strategy time label"}
 
 SCHEMA = "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/"
 
@@ -38,7 +41,7 @@ def table(folder, name, rows, types, measures=None):
         else:
             lines += [f"\tmeasure {q(label)} = "+expr]
         if label.endswith("SVG"): lines += ["\t\tdataCategory: ImageUrl"]
-        elif label not in ("Data source", "Strategy status", "Selected driver", "Session label"):
+        elif label not in TEXT_MEASURES:
             fmt = "0" if label in ("Current gear","Current brake","Selected bin","Best stop lap") else "0.000" if label.endswith(" s") else "0.00"
             lines += ['\t\tformatString: '+fmt]
         lines += [""]
@@ -116,6 +119,7 @@ VAR x = MAXX(FILTER(points, FactTelemetry[Bin] = bin), FactTelemetry[SVGX])
 VAR y = MAXX(FILTER(points, FactTelemetry[Bin] = bin), FactTelemetry[SVGY])
 VAR svg = "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 460'><rect width='640' height='460' fill='#101826'/><polyline points='" & track & "' fill='none' stroke='#29374c' stroke-width='16' stroke-linejoin='round'/><polyline points='" & track & "' fill='none' stroke='#74f7ce' stroke-width='3'/><circle cx='" & FORMAT(x,"0.0","en-US") & "' cy='" & FORMAT(y,"0.0","en-US") & "' r='9' fill='#ff544f' stroke='white' stroke-width='3'/></svg>"
 RETURN IF(NOT ISBLANK(lap), "data:image/svg+xml;utf8," & SUBSTITUTE(svg, "#", "%23"))'''
+    m.update(additional_measures())
     # Avoid collisions with the Compound table and potential function names.
     for name,text in m.items():
         for old,new in (("first","tyreOne"),("second","tyreTwo"),("compound","chosenTyre")):
@@ -145,7 +149,7 @@ def obj(**kwargs): return [{"properties":{k:literal(v) for k,v in kwargs.items()
 def visual(page,name,kind,title,x,y,w,h,roles=None,objects=None):
     config={"visualType":kind,"drillFilterOtherVisuals":True,
         "visualContainerObjects":{
-            "title":obj(show=True,text=title,fontColor="#eef4ff",fontSize=12,bold=True,fontFamily="Segoe UI"),
+            "title":obj(show=bool(title),text=title,fontColor="#a5b4cc",fontSize=14,bold=True,fontFamily="Segoe UI"),
             "background":[{"properties":{"show":literal(True),"color":{"solid":{"color":literal("#101826")}},"transparency":literal(0)}}],
             "border":obj(show=True,color="#29374c",radius=8),
             "general":obj(altText=title)}}
@@ -157,21 +161,35 @@ def visual(page,name,kind,title,x,y,w,h,roles=None,objects=None):
           "position":{"x":x,"y":y,"width":w,"height":h,"z":1,"tabOrder":len(list((page/"visuals").glob("*"))) if (page/"visuals").exists() else 0},"visual":config})
 
 
-def card(page,name,measure,title,x,y,w=220,h=115):
+def card(page,name,measure,title,x,y,w=220,h=115,font_size=30):
     visual(page,name,"card",title,x,y,w,h,{"Values":[projection("Metrics",measure,True)]},
-           {"labels":obj(color="#74f7ce",fontSize=30),"categoryLabels":obj(show=False)})
+           {"labels":obj(color="#eef4ff" if measure in TEXT_MEASURES else "#74f7ce",fontSize=font_size,displayUnits=0),"categoryLabels":obj(show=False)})
 
 
-def slicer(page,name,t,c,title,x,y,w=220,h=85):
-    visual(page,name,"slicer",title,x,y,w,h,{"Values":[projection(t,c)]},
-        {"data":obj(mode="Dropdown"),"selection":obj(singleSelect=True,selectAllCheckboxEnabled=False),
-         "items":obj(fontColor="#eef4ff",background="#101826"),"header":obj(show=False)})
+def slicer(page,name,t,c,title,x,y,w=220,h=85,default=None,mode="Dropdown"):
+    value=literal(default)["expr"]["Literal"] if default is not None else None
+    if isinstance(default,int): value={"Value":str(default)+"L"}
+    objects={"data":obj(mode=mode),"selection":obj(singleSelect=mode=="Dropdown",selectAllCheckboxEnabled=False),
+             "items":obj(fontColor="#eef4ff",background="#101826",textSize=15),"header":obj(show=False)}
+    if value is not None:
+        column={"Column":{"Expression":{"SourceRef":{"Source":"s"}},"Property":c}}
+        condition={"In":{"Expressions":[column],"Values":[[{"Literal":value}]]}}
+        if mode=="Before":
+            condition={"Comparison":{"ComparisonKind":4,"Left":column,"Right":{"Literal":value}}}
+        objects["general"]=[{"properties":{"filter":{"filter":{"Version":2,"From":[{"Name":"s","Entity":t,"Type":0}],"Where":[{"Condition":condition}]}}}}]
+    visual(page,name,"slicer",title,x,y,w,h,{"Values":[projection(t,c)]},objects)
 
 
 def line(page,name,axis,ys,title,x,y,w,h):
+    colors=["#74f7ce","#ff544f","#ffce62","#759bff"]
+    style=obj(strokeWidth=3,showMarker=False)
+    for s in ys:
+        if s in ("Replay speed cursor","Chosen stop penalty s"):
+            style.append({"properties":{"showMarker":literal(True),"markerSize":literal(8)},"selector":{"metadata":"Metrics."+s}})
     visual(page,name,"lineChart",title,x,y,w,h,{"Category":[projection(*axis)],"Y":[projection("Metrics",s,True) for s in ys]},
         {"categoryAxis":obj(labelColor="#a5b4cc",show=True),"valueAxis":obj(labelColor="#a5b4cc",show=True),
-         "legend":obj(show=True,labelColor="#eef4ff"),"lineStyles":obj(strokeWidth=3)})
+         "legend":obj(show=True,labelColor="#eef4ff",fontSize=11),"lineStyles":style,
+         "dataPoint":[{"properties":{"fill":{"solid":{"color":literal(colors[i%4])}}},"selector":{"metadata":"Metrics."+s}} for i,s in enumerate(ys)]})
 
 
 def build(data_dir,output):
@@ -194,11 +212,13 @@ def build(data_dir,output):
         for r in points:
             r["SVGX"]=round(320+(r["X"]-(xmin+xmax)/2)*scale,3)
             r["SVGY"]=round(230-(r["Y"]-(ymin+ymax)/2)*scale,3)
-    tt.update(SVGX="double",SVGY="double")
+    for r in tel:
+        r["SpeedBand"] = "Freinage" if r["Brake"] else "Rapide > 280 km/h" if r["SpeedKmh"] > 280 else "Intermédiaire" if r["SpeedKmh"] > 180 else "Lent < 180 km/h"
+    tt.update(SVGX="double",SVGY="double",SpeedBand="string")
     table(tables,"DimLap",laps,lt)
     table(tables,"FactTelemetry",tel,tt)
     table(tables,"DimDistance",[{"Bin":i,"ProgressPct":i/5} for i in range(501)],{"Bin":"int64","ProgressPct":"double"})
-    table(tables,"ReplayBin",[{"Bin":i,"ProgressPct":i/5} for i in range(501)],{"Bin":"int64","ProgressPct":"double"})
+    table(tables,"ReplayTime",[{"Seconds":i/10} for i in range(801)],{"Seconds":"double"})
     for n in ("LapA","LapB"): table(tables,n,[{"LapId":r["LapId"],"Driver":r["Driver"]} for r in laps],{"LapId":"int64","Driver":"string"})
     table(tables,"Compound",[{"Compound":c.name,"Offset":c.offset,"Degradation":c.degradation} for c in COMPOUNDS.values()],{"Compound":"string","Offset":"double","Degradation":"double"})
     for n in ("FirstCompound","SecondCompound"):
@@ -218,52 +238,12 @@ def build(data_dir,output):
     dump(output/"F1 Telemetry Lab.pbip",{"$schema":"https://developer.microsoft.com/json-schemas/fabric/pbip/pbipProperties/1.0.0/schema.json","version":"1.0","artifacts":[{"report":{"path":"F1 Telemetry Lab.Report"}}],"settings":{"enableAutoRecovery":True}})
     dump(report/"definition.pbir",{"$schema":"https://developer.microsoft.com/json-schemas/fabric/item/report/definitionProperties/2.0.0/schema.json","version":"4.0","datasetReference":{"byPath":{"path":"../F1 Telemetry Lab.SemanticModel"}}})
     dump(report/"definition"/"version.json",{"$schema":SCHEMA+"versionMetadata/1.0.0/schema.json","version":"2.0.0"})
-    theme={"name":"F1 Midnight","dataColors":["#74f7ce","#ff544f","#ffce62","#759bff"],"background":"#080e18","foreground":"#eef4ff","tableAccent":"#74f7ce"}
+    theme={"name":"F1 Midnight","dataColors":["#ff544f","#ffce62","#759bff","#74f7ce"],"background":"#080e18","foreground":"#eef4ff","tableAccent":"#74f7ce"}
     dump(report/"StaticResources"/"RegisteredResources"/"F1Midnight.json",theme)
     dump(report/"definition"/"report.json",{"$schema":SCHEMA+"report/3.1.0/schema.json",
           "themeCollection":{"customTheme":{"name":"F1Midnight","reportVersionAtImport":{"visual":"2.1.0","report":"3.1.0","page":"1.0.0"},"type":"RegisteredResources"}},
           "resourcePackages":[{"name":"RegisteredResources","type":"RegisteredResources","items":[{"name":"F1Midnight","path":"F1Midnight.json","type":"CustomTheme"}]}]})
-    names=["Replay","Comparison","Strategy"]
-    dump(report/"definition"/"pages"/"pages.json",{"$schema":SCHEMA+"pagesMetadata/1.0.0/schema.json","pageOrder":names,"activePageName":"Replay"})
-    for n,title in zip(names,["01 · Telemetry Replay","02 · Lap Performance","03 · Strategy Simulator"]):
-        page=report/"definition"/"pages"/n
-        dump(page/"page.json",{"$schema":SCHEMA+"page/1.0.0/schema.json","name":n,"displayName":title,"displayOption":"FitToPage","height":900,"width":1600,
-              "objects":{"background":[{"properties":{"color":{"solid":{"color":literal("#080e18")}},"transparency":literal(0)}}]}})
-        card(page,"source","Data source","F1 TELEMETRY LAB · "+title,24,18,1000,70)
-        card(page,"session","Session label","SESSION / PROVENANCE",1040,18,536,70)
-    p=report/"definition"/"pages"/"Replay"
-    slicer(p,"driver","DimLap","Driver","SELECT ONE DRIVER",24,110,300)
-    slicer(p,"cursor","ReplayBin","Bin","REPLAY CURSOR · bin 0–500",344,110,390)
-    card(p,"speed","Current speed kmh","SPEED · km/h",754,110,260)
-    card(p,"gear","Current gear","GEAR",1034,110,260)
-    card(p,"elapsed","Current elapsed s","ELAPSED · seconds",1314,110,262)
-    visual(p,"track","tableEx","CIRCUIT POSITION · SVG / DAX",24,245,710,480,{"Values":[projection("Metrics","Track SVG",True)]},
-           {"grid":obj(imageHeight=420,outlineColor="#101826"),"columnHeaders":obj(show=False),"total":obj(totals=False)})
-    line(p,"speedtrace",("DimDistance","ProgressPct"),["Speed trace"],"SPEED PROFILE · circuit progress %",754,245,822,230)
-    line(p,"pedals",("DimDistance","ProgressPct"),["Throttle trace","Brake trace"],"THROTTLE / BRAKE · %",754,495,822,230)
-    card(p,"throttle","Current throttle pct","THROTTLE · %",24,745,350)
-    card(p,"brake","Current brake","BRAKE · 0 / 1",394,745,340)
-    card(p,"laptime","Lap time s","LAP TIME · seconds",754,745,392)
-    card(p,"progress","Replay progress pct","PROGRESS · %",1166,745,410)
-    p=report/"definition"/"pages"/"Comparison"
-    slicer(p,"lapA","LapA","Driver","REFERENCE A",24,110,350)
-    slicer(p,"lapB","LapB","Driver","COMPARISON B",394,110,350)
-    card(p,"timeA","Lap time A s","LAP A · seconds",764,110,250)
-    card(p,"timeB","Lap time B s","LAP B · seconds",1034,110,250)
-    card(p,"delta","Lap delta s","B − A · seconds",1304,110,272)
-    line(p,"compare",("DimDistance","ProgressPct"),["Speed A","Speed B"],"SPEED OVERLAY · aligned at equal circuit progress",24,245,1552,300)
-    line(p,"deltatrace",("DimDistance","ProgressPct"),["Delta B minus A s"],"DELTA B − A · positive = B slower",24,565,1060,300)
-    for i in (1,2,3): card(p,"sector"+str(i),f"Sector {i} delta s",f"SECTOR {i} · B − A seconds",1104,565+(i-1)*100,472,90)
-    p=report/"definition"/"pages"/"Strategy"
-    for i,(t,c,title) in enumerate([("FirstCompound","Compound","STINT 1 TYRE"),("SecondCompound","Compound","STINT 2 TYRE"),
-          ("StopLap","Lap","PIT AFTER LAP"),("PitLoss","Seconds","PIT LOSS · seconds"),("Degradation","Multiplier","DEGRADATION ×"),("BasePace","Seconds","BASE LAP · seconds")]):
-        slicer(p,t,t,c,title,24+i*260,110,252)
-    card(p,"status","Strategy status","MODEL ASSUMPTIONS · 53 laps / one stop",24,215,1552,80)
-    card(p,"total","Strategy total min","RACE TOTAL · minutes",24,315,500)
-    card(p,"optimal","Best stop lap","BEST STOP · selected assumptions",544,315,500)
-    card(p,"penalty","Penalty vs best s","PENALTY VS BEST · seconds",1064,315,512)
-    line(p,"stints",("RaceLap","Lap"),["Simulated lap s"],"SIMULATED LAP TIME · pit loss charged to in-lap",24,455,760,410)
-    line(p,"candidates",("CandidateStop","Lap"),["Candidate total s"],"STRATEGY SWEEP · race seconds by stop lap",804,455,772,410)
+    render_layout(report, (dump, visual, card, slicer, line, projection, obj, literal), [r["Driver"] for r in laps])
     print(f"Generated portable PBIP at {output}")
 
 

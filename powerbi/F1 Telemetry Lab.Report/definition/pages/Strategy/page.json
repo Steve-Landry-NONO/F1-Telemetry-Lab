@@ -1,7 +1,7 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/1.0.0/schema.json",
   "name": "Strategy",
-  "displayName": "03 · Strategy Simulator",
+  "displayName": "03 · Stratégie",
   "displayOption": "FitToPage",
   "height": 900,
   "width": 1600,
@@ -30,5 +30,247 @@
         }
       }
     ]
-  }
+  },
+  "visualInteractions": [
+    {
+      "source": "candidates",
+      "target": "penalty",
+      "type": "NoFilter"
+    },
+    {
+      "source": "candidates",
+      "target": "total",
+      "type": "NoFilter"
+    },
+    {
+      "source": "candidates",
+      "target": "source",
+      "type": "NoFilter"
+    },
+    {
+      "source": "candidates",
+      "target": "heading",
+      "type": "NoFilter"
+    },
+    {
+      "source": "candidates",
+      "target": "FirstCompound",
+      "type": "NoFilter"
+    },
+    {
+      "source": "candidates",
+      "target": "Degradation",
+      "type": "NoFilter"
+    },
+    {
+      "source": "candidates",
+      "target": "status",
+      "type": "NoFilter"
+    },
+    {
+      "source": "candidates",
+      "target": "PitLoss",
+      "type": "NoFilter"
+    },
+    {
+      "source": "candidates",
+      "target": "insight",
+      "type": "NoFilter"
+    },
+    {
+      "source": "candidates",
+      "target": "optimal",
+      "type": "NoFilter"
+    },
+    {
+      "source": "candidates",
+      "target": "subtitle",
+      "type": "NoFilter"
+    },
+    {
+      "source": "candidates",
+      "target": "StopLap",
+      "type": "NoFilter"
+    },
+    {
+      "source": "candidates",
+      "target": "plan",
+      "type": "NoFilter"
+    },
+    {
+      "source": "candidates",
+      "target": "SecondCompound",
+      "type": "NoFilter"
+    },
+    {
+      "source": "candidates",
+      "target": "BasePace",
+      "type": "NoFilter"
+    },
+    {
+      "source": "candidates",
+      "target": "stints",
+      "type": "NoFilter"
+    },
+    {
+      "source": "plan",
+      "target": "penalty",
+      "type": "NoFilter"
+    },
+    {
+      "source": "plan",
+      "target": "candidates",
+      "type": "NoFilter"
+    },
+    {
+      "source": "plan",
+      "target": "total",
+      "type": "NoFilter"
+    },
+    {
+      "source": "plan",
+      "target": "source",
+      "type": "NoFilter"
+    },
+    {
+      "source": "plan",
+      "target": "heading",
+      "type": "NoFilter"
+    },
+    {
+      "source": "plan",
+      "target": "FirstCompound",
+      "type": "NoFilter"
+    },
+    {
+      "source": "plan",
+      "target": "Degradation",
+      "type": "NoFilter"
+    },
+    {
+      "source": "plan",
+      "target": "status",
+      "type": "NoFilter"
+    },
+    {
+      "source": "plan",
+      "target": "PitLoss",
+      "type": "NoFilter"
+    },
+    {
+      "source": "plan",
+      "target": "insight",
+      "type": "NoFilter"
+    },
+    {
+      "source": "plan",
+      "target": "optimal",
+      "type": "NoFilter"
+    },
+    {
+      "source": "plan",
+      "target": "subtitle",
+      "type": "NoFilter"
+    },
+    {
+      "source": "plan",
+      "target": "StopLap",
+      "type": "NoFilter"
+    },
+    {
+      "source": "plan",
+      "target": "SecondCompound",
+      "type": "NoFilter"
+    },
+    {
+      "source": "plan",
+      "target": "BasePace",
+      "type": "NoFilter"
+    },
+    {
+      "source": "plan",
+      "target": "stints",
+      "type": "NoFilter"
+    },
+    {
+      "source": "stints",
+      "target": "penalty",
+      "type": "NoFilter"
+    },
+    {
+      "source": "stints",
+      "target": "candidates",
+      "type": "NoFilter"
+    },
+    {
+      "source": "stints",
+      "target": "total",
+      "type": "NoFilter"
+    },
+    {
+      "source": "stints",
+      "target": "source",
+      "type": "NoFilter"
+    },
+    {
+      "source": "stints",
+      "target": "heading",
+      "type": "NoFilter"
+    },
+    {
+      "source": "stints",
+      "target": "FirstCompound",
+      "type": "NoFilter"
+    },
+    {
+      "source": "stints",
+      "target": "Degradation",
+      "type": "NoFilter"
+    },
+    {
+      "source": "stints",
+      "target": "status",
+      "type": "NoFilter"
+    },
+    {
+      "source": "stints",
+      "target": "PitLoss",
+      "type": "NoFilter"
+    },
+    {
+      "source": "stints",
+      "target": "insight",
+      "type": "NoFilter"
+    },
+    {
+      "source": "stints",
+      "target": "optimal",
+      "type": "NoFilter"
+    },
+    {
+      "source": "stints",
+      "target": "subtitle",
+      "type": "NoFilter"
+    },
+    {
+      "source": "stints",
+      "target": "StopLap",
+      "type": "NoFilter"
+    },
+    {
+      "source": "stints",
+      "target": "plan",
+      "type": "NoFilter"
+    },
+    {
+      "source": "stints",
+      "target": "SecondCompound",
+      "type": "NoFilter"
+    },
+    {
+      "source": "stints",
+      "target": "BasePace",
+      "type": "NoFilter"
+    }
+  ]
 }

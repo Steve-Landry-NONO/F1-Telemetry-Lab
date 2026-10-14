@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.1.0/schema.json",
   "name": "optimal",
   "position": {
-    "x": 544,
-    "y": 315,
+    "x": 542,
+    "y": 310,
     "width": 500,
-    "height": 115,
+    "height": 94,
     "z": 1,
-    "tabOrder": 10
+    "tabOrder": 11
   },
   "visual": {
     "visualType": "card",
@@ -26,21 +26,21 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'BEST STOP · selected assumptions'"
+                  "Value": "'MEILLEUR ARRÊT · tour'"
                 }
               }
             },
             "fontColor": {
               "expr": {
                 "Literal": {
-                  "Value": "'#eef4ff'"
+                  "Value": "'#a5b4cc'"
                 }
               }
             },
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "12D"
+                  "Value": "14D"
                 }
               }
             },
@@ -125,7 +125,7 @@
             "altText": {
               "expr": {
                 "Literal": {
-                  "Value": "'BEST STOP · selected assumptions'"
+                  "Value": "'MEILLEUR ARRÊT · tour'"
                 }
               }
             }
@@ -169,7 +169,14 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "30D"
+                  "Value": "38D"
+                }
+              }
+            },
+            "displayUnits": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
                 }
               }
             }
